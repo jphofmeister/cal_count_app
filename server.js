@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const ingredients = require('./routes/api/ingredients');
 const food = require('./routes/api/food');
-//const upload = require('./routes/api/upload');
+const day = require('./routes/api/day');
 
 const app = express();
 
@@ -26,7 +26,7 @@ mongoose
 // Use Routes
 app.use('/api/ingredients', ingredients);
 app.use('/api/food', food);
-//app.use('/api/upload', upload);
+app.use('/api/day', day);
 
 const port = process.env.PORT || 5000;
 

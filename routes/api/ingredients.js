@@ -2,13 +2,10 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-//get ingredients (get)
-//get ingredient by id (get)
-//create ingredient (post)
-//edit ingredient (put)
-//delete ingredients (delete)
-
 const Ingredient = require('../../models/Ingredient');
+
+//Load input validation
+const valIngredientInput = require('../../validation/ingredients');
 
 // @route   GET api/ingredients
 // @desc    get all ingredients
@@ -33,12 +30,12 @@ router.get('/:id', (req, res) => {
 // @desc    create ingredient
 // @access  Public
 router.post('/', (req, res) => {
-  // const {errors, isValid} = valIngredientInput(req.body);
+  const { errors, isValid } = valIngredientInput(req.body);
 
-  // // check validation
-  // if (!isValid) {
-  //   return res.status(400).json(errors);
-  // }
+  // check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
 
   const newIngredient = {};
   if (req.body.name) newIngredient.name = req.body.name;
@@ -52,16 +49,16 @@ router.post('/', (req, res) => {
 // @desc    edit ingredient
 // @access  Public
 router.put('/:id', (req, res) => {
-  // const {errors, isValid} = valIngredientInput(req.body);
+  const { errors, isValid } = valIngredientInput(req.body);
 
-  // // check validation
-  // if (!isValid) {
-  //   return res.status(400).json(errors);
-  // }
+  // check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
 
   const updatedIngredient = {};
-  if (req.body.name) newIngredient.name = req.body.name;
-  if (req.body.calories) newIngredient.calories = req.body.calories;
+  if (req.body.name) updatedIngredient.name = req.body.name;
+  if (req.body.calories) updatedIngredient.calories = req.body.calories;
 
   Ingredient.findOneAndUpdate(
     { _id: req.params.id },
@@ -76,7 +73,7 @@ router.put('/:id', (req, res) => {
 // @desc    delete ingredient
 // @access  Public
 router.delete('/:id', (req, res) => {
-  Ingredient.findById({ ingredient: req.params.id })
+  Ingredient.findById(req.params.id)
     .then(ingredient => {
       ingredient.remove().then(() => res.json({ success: true }));
     })

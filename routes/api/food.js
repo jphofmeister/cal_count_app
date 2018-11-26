@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const Ingredient = require('../../models/Ingredient');
 const Food = require('../../models/Food');
+
+//Load input validation
+const valFoodInput = require('../../validation/food');
 
 // @route   GET api/food
 // @desc    get all food
@@ -28,12 +30,12 @@ router.get('/:id', (req, res) => {
 // @desc    create food item
 // @access  Public
 router.post('/', (req, res) => {
-  // const {errors, isValid} = valFoodInput(req.body);
+  const { errors, isValid } = valFoodInput(req.body);
 
-  // // check validation
-  // if (!isValid) {
-  //   return res.status(400).json(errors);
-  // }
+  // check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
 
   const newFood = {};
   if (req.body.name) newFood.name = req.body.name;
@@ -45,5 +47,44 @@ router.post('/', (req, res) => {
 
   new Food(newFood).save().then(food => res.json(food));
 });
+
+// @route   PUT api/food/:id
+// @desc    edit food
+// @access  Public
+router.put('/:id', (req, res) => {
+  const { errors, isValid } = valFoodInput(req.body);
+
+  // check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  const updatedFood = {};
+  if (req.body.name) updatedFood.name = req.body.name;
+  if (req.body.foodType) updatedFood.foodType = req.body.foodType;
+  if (typeof req.body.ingredients != 'undefined') {
+    updatedFood.ingredients = req.body.ingredients.split(',');
+  }
+  if (req.body.calories) updatedFood.calories = req.body.calories;
+
+  Food.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: updatedFood },
+    { new: true }
+  )
+    .then(food => res.json(food))
+    .catch(err => res.status(404).json(err));
+});
+
+// @route   DELETE api/food/:id
+// @desc    delete food
+// @access  Public
+router.delete('/:id', (req, res) => {
+  Food.findById(req.params.id)
+    .then(food => {
+      food.remove().then(() => res.json({ success: true }));
+    })
+    .catch(err => res.status(404).json({ nofood: 'No food found' }));
+})
 
 module.exports = router;
