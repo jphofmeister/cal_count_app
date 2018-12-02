@@ -6,7 +6,7 @@ class Ingredient extends Component {
     return (
       <div>
         <Button onClick={() => { this.props.history.replace('/create-ingredient') }}>+ Create Ingredient</Button>
-
+        {/* test */}
       </div>
     )
   }
