@@ -1,0 +1,14 @@
+export const ADD_INGREDIENT = 'ADD_INGREDIENT';
+export const EDIT_INGREDIENT = 'EDIT_INGREDIENT';
+export const GET_INGREDIENT = 'GET_INGREDIENT';
+export const GET_INGREDIENTS = 'GET_INGREDIENTS'
+export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
+export const INGREDIENT_LOADING = 'INGREDIENT_LOADING';
+export const ADD_FOOD = 'ADD_FOOD';
+export const EDIT_FOOD = 'EDIT_FOOD';
+export const GET_FOOD = 'GET_FOOD';
+export const GET_FOODS = 'GET_FOODS'
+export const DELETE_FOOD = 'DELETE_FOOD';
+export const FOOD_LOADING = 'FOOD_LOADING';
+export const GET_ERRORS = 'GET_ERRORS';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
