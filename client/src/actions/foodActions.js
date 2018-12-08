@@ -85,11 +85,14 @@ export const getFood = id => dispatch => {
 }
 
 //delete food
-export const deleteFood = (id, history) => dispatch => {
+export const deleteFood = id => dispatch => {
   axios
     .delete(`/api/food/${id}`)
     .then(res =>
-      history.push('/')
+      dispatch({
+        type: DELETE_FOOD,
+        payload: id
+      })
     )
     .catch(err =>
       dispatch({

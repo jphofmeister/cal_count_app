@@ -5,7 +5,7 @@ import {
   GET_INGREDIENTS,
   DELETE_INGREDIENT,
   INGREDIENT_LOADING
-} from './types';
+} from '../actions/types';
 
 const initialState = {
   ingredients: [],

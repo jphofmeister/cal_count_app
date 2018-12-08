@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 import Week from './Week';
 import Today from './Today';
+import Ingredients from '../ingredients/Ingredients';
+import Food from '../food/Food';
+
+import { Row } from 'reactstrap';
 
 class Dashboard extends Component {
   render() {
@@ -9,7 +13,11 @@ class Dashboard extends Component {
       <div>
         <h1 className="col">Dashboard</h1>
         <Week />
-        <Today />
+        <Row className="mr-0 ml-0">
+          <Today />
+          <Ingredients />
+          <Food />
+        </Row>
       </div>
     )
   }

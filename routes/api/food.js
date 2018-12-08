@@ -83,6 +83,7 @@ router.delete('/:id', (req, res) => {
   Food.findById(req.params.id)
     .then(food => {
       food.remove().then(() => res.json({ success: true }));
+      //food.remove().then(() => res.json(food));
     })
     .catch(err => res.status(404).json({ nofood: 'No food found' }));
 })

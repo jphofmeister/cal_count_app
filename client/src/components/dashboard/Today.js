@@ -5,6 +5,7 @@ class Today extends Component {
   render() {
     return (
       <Col xs="3">
+        <h3>Today</h3>
         <Input type="date" />
       </Col>
     )

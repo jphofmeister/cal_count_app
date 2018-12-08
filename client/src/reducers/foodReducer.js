@@ -5,7 +5,7 @@ import {
   GET_FOODS,
   DELETE_FOOD,
   FOOD_LOADING
-} from './types';
+} from '../actions/types';
 
 const initialState = {
   foods: [],
