@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getFoods, deleteFood } from '../../actions/foodActions';
 
-import FoodList from './FoodList';
+import TableItem from '../common/TableItem';
 import Spinner from '../common/Spinner';
-import { Button, Col } from 'reactstrap';
+import { Button, Col, Table } from 'reactstrap';
 
 class Food extends Component {
   constructor(props) {
@@ -29,15 +30,17 @@ class Food extends Component {
     if (foods === null || loading) {
       foodContent = <Spinner />
     } else {
-      foodContent = <FoodList foods={foods} onDeleteClick={this.onDeleteClick} />
+      foodContent = <Table>
+        <tbody>
+          <TableItem items={foods} onDeleteClick={this.onDeleteClick} />
+        </tbody>
+      </Table>
     }
 
     return (
       <Col xs="6">
         <h3>Food</h3>
-        <Button onClick={() => { this.props.history.replace('/create-food') }}>
-          + Create Food
-        </Button>
+        <Button tag={Link} to="/create-food" color="primary">+ Create Food</Button>
         {foodContent}
       </Col>
     )

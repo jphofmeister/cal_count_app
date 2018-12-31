@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {
-  ADD_FOOD,
+  //ADD_FOOD,
   EDIT_FOOD,
   GET_FOOD,
   GET_FOODS,

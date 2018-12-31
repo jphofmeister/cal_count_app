@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {
-  ADD_INGREDIENT,
+  //ADD_INGREDIENT,
   EDIT_INGREDIENT,
   GET_INGREDIENT,
   GET_INGREDIENTS,
@@ -89,7 +89,10 @@ export const deleteIngredient = (id, history) => dispatch => {
   axios
     .delete(`/api/ingredients/${id}`)
     .then(res =>
-      history.push('/')
+      dispatch({
+        type: DELETE_INGREDIENT,
+        payload: id
+      })
     )
     .catch(err =>
       dispatch({

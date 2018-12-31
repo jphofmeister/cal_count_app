@@ -5,16 +5,23 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import Dashboard from './components/dashboard/Dashboard';
+import CreateIngredient from './components/ingredients/CreateIngredient';
+import CreateFood from './components/food/CreateFood';
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <Router>
-          <Route exact path="/" component={Dashboard} />
-          {/* <Route exact path="/create-food-item" component={CreateFoodItem} /> */}
-          {/* <Route exact path="/create-ingredient" component={CreateIngredient} /> */}
-
+          <div>
+            <Route exact path="/" component={Dashboard} />
+            <Switch>
+              <Route exact path="/create-food" component={CreateFood} />
+            </Switch>
+            <Switch>
+              <Route exact path="/create-ingredient" component={CreateIngredient} />
+            </Switch>
+          </div>
         </Router>
       </Provider>
     );

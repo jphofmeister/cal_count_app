@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getIngredients } from '../../actions/ingredientActions';
+import { Link } from 'react-router-dom';
+import { getIngredients, deleteIngredient } from '../../actions/ingredientActions';
 
-import IngredientList from './IngredientList';
+//import IngredientList from './IngredientList';
+import TableItem from '../common/TableItem';
 import Spinner from '../common/Spinner';
-import { Button, Col } from 'reactstrap';
+import { Button, Col, Table } from 'reactstrap';
 
 class Ingredients extends Component {
+  constructor(props) {
+    super(props);
+    this.onDeleteClick = this.onDeleteClick.bind(this);
+  }
+
   componentDidMount() {
     this.props.getIngredients();
+  }
+
+  onDeleteClick(id) {
+    this.props.deleteIngredient(id);
   }
 
   render() {
@@ -20,13 +31,17 @@ class Ingredients extends Component {
     if (ingredients === null || loading) {
       ingredientContent = <Spinner />
     } else {
-      ingredientContent = <IngredientList ingredients={ingredients} />
+      ingredientContent = <Table>
+        <tbody>
+          <TableItem items={ingredients} onDeleteClick={this.onDeleteClick} />
+        </tbody>
+      </Table>
     }
 
     return (
       <Col xs="3">
         <h3>Ingredients</h3>
-        <Button onClick={() => { this.props.history.replace('/create-ingredient') }}>+ Create Ingredient</Button>
+        <Button tag={Link} to="/create-ingredient" color="primary">+ Create Ingredient</Button>
         {ingredientContent}
       </Col>
     )
@@ -35,6 +50,7 @@ class Ingredients extends Component {
 
 Ingredients.propTypes = {
   getIngredients: PropTypes.func.isRequired,
+  deleteIngredient: PropTypes.func.isRequired,
   ingredient: PropTypes.object.isRequired
 }
 
@@ -42,4 +58,4 @@ const mapStateToProps = state => ({
   ingredient: state.ingredient
 });
 
-export default connect(mapStateToProps, { getIngredients })(Ingredients);
+export default connect(mapStateToProps, { getIngredients, deleteIngredient })(Ingredients);

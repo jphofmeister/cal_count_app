@@ -5,7 +5,7 @@ class Week extends Component {
   render() {
     return (
       <Col>
-        <h2>Week</h2>
+        <h2>This Week</h2>
         <Table>
           <thead>
             <tr>

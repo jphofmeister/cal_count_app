@@ -40,9 +40,10 @@ router.post('/', (req, res) => {
   const newFood = {};
   if (req.body.name) newFood.name = req.body.name;
   if (req.body.foodType) newFood.foodType = req.body.foodType;
-  if (typeof req.body.ingredients != 'undefined') {
-    newFood.ingredients = req.body.ingredients.split(',');
-  }
+  // if (typeof req.body.ingredients != 'undefined') {
+  //   newFood.ingredients = req.body.ingredients.split(',');
+  // }
+  if (req.body.ingredients) newFood.ingredients = req.body.ingredients;
   if (req.body.calories) newFood.calories = req.body.calories;
 
   new Food(newFood).save().then(food => res.json(food));

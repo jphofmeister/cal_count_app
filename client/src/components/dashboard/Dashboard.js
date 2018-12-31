@@ -11,12 +11,12 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <h1 className="col">Dashboard</h1>
+        {/* <h1 className="col">Dashboard</h1> */}
         <Week />
         <Row className="mr-0 ml-0">
           <Today />
-          <Ingredients />
           <Food />
+          <Ingredients />
         </Row>
       </div>
     )
