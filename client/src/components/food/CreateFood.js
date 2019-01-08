@@ -7,8 +7,14 @@ import { addFood } from '../../actions/foodActions';
 import { getIngredients } from '../../actions/ingredientActions';
 import Spinner from '../common/Spinner';
 
-import { ButtonGroup, Button, Form, FormGroup, Label, Input, Container, Row, Col, Table } from 'reactstrap';
+import { Button, Form, FormGroup, Container, Row, Col, Table } from 'reactstrap';
+import TextInput from '../common/TextInput';
+import RadioButtons from '../common/RadioButtons';
 import TableItem from '../common/TableItem';
+
+import food_type_meal from './food_type_meal.png';
+import food_type_snack from './food_type_snack.png';
+import food_type_beverage from './food_type_beverage.png';
 
 class CreateFood extends Component {
   constructor(props) {
@@ -27,7 +33,8 @@ class CreateFood extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onCancelClick = this.onCancelClick.bind(this);
     this.onAddIngredient = this.onAddIngredient.bind(this);
-    this.toggleFoodType = this.toggleFoodType.bind(this);
+    this.onMealClick = this.onMealClick.bind(this);
+    this.onSnackBevClick = this.onSnackBevClick.bind(this);
   }
 
   componentDidMount() {
@@ -42,29 +49,18 @@ class CreateFood extends Component {
     });
   }
 
-  // toggleOptions(e) {
-  //   e.preventDefault();
-  //   this.setState({
-  //     areOptionsHidden: !this.state.areOptionsHidden
-  //   });
-  // }
+  onMealClick() {
+    this.setState({
+      areIngredientsHidden: false,
+      areCaloriesHidden: false
+    })
+  }
 
-  toggleFoodType(e) {
-    e.preventDefault();
-
-    if (this.state.foodType === "meal") {
-      this.setState({
-        areIngredientsHidden: false,
-        areCaloriesHidden: false
-      })
-    }
-
-    if (this.state.foodType === "snack" || this.state.foodType === "beverage") {
-      this.setState({
-        areIngredientsHidden: true,
-        areCaloriesHidden: false
-      })
-    }
+  onSnackBevClick() {
+    this.setState({
+      areIngredientsHidden: true,
+      areCaloriesHidden: false
+    })
   }
 
   onChange(e) {
@@ -102,6 +98,7 @@ class CreateFood extends Component {
   }
 
   render() {
+    const { errors } = this.state;
     const { ingredients, loading } = this.props.ingredient;
 
     // this is the list of ingredients to select from
@@ -138,31 +135,32 @@ class CreateFood extends Component {
       );
     });
 
+    const radioOptions = [
+      { name: 'foodType', image: food_type_meal, value: 'Meal', checked: this.state.foodType === 'Meal', onChange: this.onChange, onClick: this.onMealClick },
+      { name: 'foodType', image: food_type_snack, value: 'Snack', checked: this.state.foodType === 'Snack', onChange: this.onChange, onClick: this.onSnackBevClick },
+      { name: 'foodType', image: food_type_beverage, value: 'Beverage', checked: this.state.foodType === 'Beverage', onChange: this.onChange, onClick: this.onSnackBevClick }
+    ];
+
     return (
       <Container>
         <h1>Create Food Item</h1>
         <Form onSubmit={this.onSubmit}>
           <Row>
             <Col>
-              <FormGroup>
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  type="text"
-                  name="name"
-                  placeholder="Enter food name"
-                  value={this.state.name}
-                  onChange={this.onChange} />
-              </FormGroup>
-              <FormGroup>
-                <Input type="radio" id="meal" name="foodType" value="Meal" onChange={this.onChange} checked={this.state.foodType === 'Meal'} />
-                <Label htmlFor="meal">Meal</Label>
-                <Input type="radio" id="snack" name="foodType" value="Snack" onChange={this.onChange} checked={this.state.foodType === 'Snack'} />
-                <Label htmlFor="snack">Snack</Label>
-                <Input type="radio" id="beverage" name="foodType" value="Beverage" onChange={this.onChange} checked={this.state.foodType === 'Beverage'} />
-                <Label htmlFor="beverage">Beverage</Label>
-              </FormGroup>
+              <TextInput
+                name="name"
+                labelText="Name"
+                placeholder="Enter food name"
+                value={this.state.name}
+                onChange={this.onChange}
+                error={errors.name} />
 
-              {!this.state.areIngredientsHidden &&
+              <RadioButtons
+                legend="Food Type"
+                options={radioOptions}
+                error={errors.foodType} />
+
+              {!this.state.areIngredientsHidden ?
                 <FormGroup>
                   <p>Added Ingredients:</p>
                   <Table>
@@ -177,26 +175,27 @@ class CreateFood extends Component {
                     </tbody>
                   </Table>
                 </FormGroup>
+                : null
               }
 
-              {!this.state.areCaloriesHidden &&
-                <FormGroup>
-                  <Label>Calories</Label>
-                  <Input
-                    type="text"
-                    name="calories"
-                    placeholder="Enter total calories for this food"
-                    value={this.state.calories}
-                    onChange={this.onChange} />
-                </FormGroup>
+              {!this.state.areCaloriesHidden ?
+                <TextInput
+                  name="calories"
+                  labelText="Calories"
+                  placeholder="Enter total calories for this food"
+                  value={this.state.calories}
+                  onChange={this.onChange}
+                  error={errors.name} />
+                : null
               }
+
 
             </Col>
             {ingredientList}
           </Row>
           <Button type="submit" color="primary">Submit</Button>
           <Button onClick={this.onCancelClick}>Cancel</Button>
-        </Form>
+        </Form >
       </Container >
     )
   }
