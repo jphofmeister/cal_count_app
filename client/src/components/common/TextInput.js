@@ -13,6 +13,7 @@ const TextInput = ({
   type,
   onChange,
   disabled,
+  readOnly,
   step,
   divClass
 }) => {
@@ -26,6 +27,7 @@ const TextInput = ({
         value={value}
         onChange={onChange}
         disabled={disabled}
+        readOnly={readOnly}
         step={step}
       />
       {info && <small className="form-text text-muted">{info}</small>}
@@ -42,7 +44,8 @@ TextInput.propTypes = {
   error: PropTypes.string,
   type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  disabled: PropTypes.string
+  disabled: PropTypes.string,
+  readOnly: PropTypes.string
 };
 
 TextInput.defaultProps = {

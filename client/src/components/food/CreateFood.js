@@ -26,7 +26,8 @@ class CreateFood extends Component {
       calories: '',
       errors: {},
       areIngredientsHidden: true,
-      areCaloriesHidden: true
+      areCaloriesHidden: true,
+      areCaloriesReadOnly: false
     }
 
     this.onChange = this.onChange.bind(this);
@@ -52,14 +53,16 @@ class CreateFood extends Component {
   onMealClick() {
     this.setState({
       areIngredientsHidden: false,
-      areCaloriesHidden: false
+      areCaloriesHidden: false,
+      areCaloriesReadOnly: true
     })
   }
 
   onSnackBevClick() {
     this.setState({
       areIngredientsHidden: true,
-      areCaloriesHidden: false
+      areCaloriesHidden: false,
+      areCaloriesReadOnly: false
     })
   }
 
@@ -91,7 +94,8 @@ class CreateFood extends Component {
       calories: '',
       errors: {},
       areIngredientsHidden: true,
-      areCaloriesHidden: true
+      areCaloriesHidden: true,
+      areCaloriesReadOnly: false
     });
 
     this.props.history.push('/');
@@ -185,6 +189,7 @@ class CreateFood extends Component {
                   placeholder="Enter total calories for this food"
                   value={this.state.calories}
                   onChange={this.onChange}
+                  readOnly={this.state.areCaloriesReadOnly}
                   error={errors.name} />
                 : null
               }
