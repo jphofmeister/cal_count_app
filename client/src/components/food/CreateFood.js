@@ -16,6 +16,8 @@ import food_type_meal from './food_type_meal.png';
 import food_type_snack from './food_type_snack.png';
 import food_type_beverage from './food_type_beverage.png';
 
+//test
+
 class CreateFood extends Component {
   constructor(props) {
     super(props);
