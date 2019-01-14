@@ -12,7 +12,7 @@ class CreateIngredient extends Component {
     super(props);
     this.state = {
       name: '',
-      calories: '',
+      calories: 0,
       errors: {}
     }
 
@@ -51,7 +51,7 @@ class CreateIngredient extends Component {
           <FormGroup>
             <Label htmlFor="calories">Calories</Label>
             <Input
-              type="text"
+              type="number"
               name="calories"
               placeholder="Enter calories of this ingredient"
               value={this.state.calories}

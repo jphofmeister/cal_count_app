@@ -12,11 +12,9 @@ import TextInput from '../common/TextInput';
 import RadioButtons from '../common/RadioButtons';
 import TableItem from '../common/TableItem';
 
-import food_type_meal from './food_type_meal.png';
-import food_type_snack from './food_type_snack.png';
-import food_type_beverage from './food_type_beverage.png';
-
-//test
+import food_type_meal from './images/food_type_meal.png';
+import food_type_snack from './images/food_type_snack.png';
+import food_type_beverage from './images/food_type_beverage.png';
 
 class CreateFood extends Component {
   constructor(props) {
@@ -25,7 +23,7 @@ class CreateFood extends Component {
       name: '',
       foodType: '',
       foodIngredients: [],
-      calories: '',
+      calories: 0,
       errors: {},
       areIngredientsHidden: true,
       areCaloriesHidden: true,
@@ -44,11 +42,14 @@ class CreateFood extends Component {
     this.props.getIngredients();
   }
 
-  onAddIngredient(id, e) {
+  onAddIngredient(id, ingCalories, e) {
     e.preventDefault();
 
+    let newCalories = this.state.calories + ingCalories;
+
     this.setState({
-      foodIngredients: [...this.state.foodIngredients, id]
+      foodIngredients: [...this.state.foodIngredients, id],
+      calories: newCalories
     });
   }
 
@@ -56,7 +57,7 @@ class CreateFood extends Component {
     this.setState({
       areIngredientsHidden: false,
       areCaloriesHidden: false,
-      areCaloriesReadOnly: true
+      //areCaloriesReadOnly: true
     })
   }
 
@@ -64,7 +65,7 @@ class CreateFood extends Component {
     this.setState({
       areIngredientsHidden: true,
       areCaloriesHidden: false,
-      areCaloriesReadOnly: false
+      //areCaloriesReadOnly: false
     })
   }
 
@@ -93,11 +94,11 @@ class CreateFood extends Component {
       name: '',
       foodType: '',
       foodIngredients: [],
-      calories: '',
+      calories: 0,
       errors: {},
       areIngredientsHidden: true,
       areCaloriesHidden: true,
-      areCaloriesReadOnly: false
+      //areCaloriesReadOnly: false
     });
 
     this.props.history.push('/');
@@ -186,6 +187,7 @@ class CreateFood extends Component {
 
               {!this.state.areCaloriesHidden ?
                 <TextInput
+                  type="number"
                   name="calories"
                   labelText="Calories"
                   placeholder="Enter total calories for this food"

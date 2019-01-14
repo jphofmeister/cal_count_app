@@ -10,7 +10,7 @@ const TableItem = ({
     <tr key={item._id}>
       {onAddClick &&
         <td>
-          <button onClick={(e) => onAddClick(item._id, e)}>
+          <button onClick={(e) => onAddClick(item._id, item.calories, e)}>
             <i className="fas fa-plus" />
           </button>
         </td>
