@@ -16,14 +16,15 @@ router.get('/', (req, res) => {
     .catch(err => res.status(404).json({ nodays: 'No records found for any days.' }));
 });
 
-// @route   GET api/day/:id
+// @route   GET api/day/:id 
 // @desc    get food record for a single day
 // @access  Public
-router.get('/:id', (req, res) => {
-  Day.findById(req.params.id)
+router.get('/:date', (req, res) => {
+  // Day.findById(req.params.id)
+  Day.findOne({ date: req.body.date })
     .populate({
       path: 'foodEaten',
-      populate: { path: 'ingredients' }
+      populate: { path: 'food' } //was ingredients before, but why?
     })
     .then(day => res.json(day))
     .catch(err => res.status(404).json({ noday: 'No record found on this date.' }))

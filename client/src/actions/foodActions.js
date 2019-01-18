@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {
-  //ADD_FOOD,
+  //ADD_FOOD, 
   EDIT_FOOD,
   GET_FOOD,
   GET_FOODS,
@@ -28,7 +28,7 @@ export const addFood = (foodData, history) => dispatch => {
 }
 
 //edit food
-export const editFood = (id, updatedFood, history) => dispatch => {
+export const editFood = (id, updatedFood) => dispatch => {
   dispatch(clearErrors());
   axios
     .put(`/api/food/${id}`, updatedFood)
