@@ -3,9 +3,11 @@ import { combineReducers } from 'redux';
 import errorReducer from './errorReducer';
 import ingredientReducer from './ingredientReducer';
 import foodReducer from './foodReducer';
+import dayReducer from './dayReducer';
 
 export default combineReducers({
   errors: errorReducer,
   ingredient: ingredientReducer,
-  food: foodReducer
+  food: foodReducer,
+  day: dayReducer
 });

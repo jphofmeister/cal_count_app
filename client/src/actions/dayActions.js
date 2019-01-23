@@ -47,29 +47,29 @@ export const editDay = (id, updatedDay) => dispatch => {
 }
 
 //get days
-// export const getDay = () => dispatch => {
-//   dispatch(setDayLoading());
-//   axios
-//     .get('/api/day')
-//     .then(res =>
-//       dispatch({
-//         type: GET_DAYS,
-//         payload: res.data
-//       })
-//     )
-//     .catch(err =>
-//       dispatch({
-//         type: GET_DAYS,
-//         payload: null
-//       })
-//     );
-// }
-
-//get day
-export const getDay = date => dispatch => {
+export const getDays = () => dispatch => {
   dispatch(setDayLoading());
   axios
-    .get(`/api/day/${date}`)
+    .get('/api/day')
+    .then(res =>
+      dispatch({
+        type: GET_DAYS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_DAYS,
+        payload: null
+      })
+    );
+}
+
+//get day
+export const getDay = newDate => dispatch => {
+  dispatch(setDayLoading());
+  axios
+    .get('/api/day/date', { params: { date: newDate } })
     .then(res =>
       dispatch({
         type: GET_DAY,

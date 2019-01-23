@@ -16,12 +16,12 @@ router.get('/', (req, res) => {
     .catch(err => res.status(404).json({ nodays: 'No records found for any days.' }));
 });
 
-// @route   GET api/day/:id 
+// @route   GET api/day/day
 // @desc    get food record for a single day
 // @access  Public
-router.get('/:date', (req, res) => {
+router.get('/date', (req, res) => {
   // Day.findById(req.params.id)
-  Day.findOne({ date: req.body.date })
+  Day.findOne({ date: req.query.date })
     .populate({
       path: 'foodEaten',
       populate: { path: 'food' } //was ingredients before, but why?
