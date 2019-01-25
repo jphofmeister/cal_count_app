@@ -20,7 +20,6 @@ router.get('/', (req, res) => {
 // @desc    get food record for a single day
 // @access  Public
 router.get('/date', (req, res) => {
-  // Day.findById(req.params.id)
   Day.findOne({ date: req.query.date })
     .populate({
       path: 'foodEaten',
@@ -41,14 +40,28 @@ router.post('/', (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const newDay = {};
-  if (req.body.date) newDay.date = req.body.date;
+  const dayData = {};
+  if (req.body.date) dayData.date = req.body.date;
   if (typeof req.body.foodEaten != 'undefined') {
-    newDay.foodEaten = req.body.foodEaten.split(',');
+    dayData.foodEaten = req.body.foodEaten.split(',');
   }
-  if (req.body.calories) newDay.calories = req.body.calories;
+  if (req.body.calories) dayData.calories = req.body.calories;
 
-  new Day(newDay).save().then(day => res.json(day));
+  Day.findOne({ date: req.body.date })
+    .then(day => {
+      if (day) {
+        // if day exists, update
+        Day.findOneAndUpdate(
+          { date: req.body.date },
+          { $set: dayData },
+          { new: true }
+        ).then(day => res.json(day))
+      } else {
+        //doesn't exist, create
+        new Day(newDay).save().then(day => res.json(day));
+      }
+    })
+    .catch(err => res.status(404).json(err));
 });
 
 // @route   PUT api/day/:id
@@ -78,13 +91,38 @@ router.put('/:id', (req, res) => {
     .catch(err => res.status(404).json(err));
 });
 
-// @route   DELETE api/day/:id
+// @route   DELETE api/day/date
 // @desc    remove food record of a single day
 // @access  Public
-router.delete('/:id', (req, res) => {
-  Day.findById(req.params.id)
+router.delete('/date', (req, res) => {
+  Day.findOne({ date: req.query.date })
     .then(day => {
       day.remove().then(() => res.json({ success: true }));
+    })
+    .catch(err => res.status(404).json({ noday: 'No record found on this date.' }))
+});
+
+// @route   DELETE api/day/date/food
+// @desc    remove single food item from a day
+// @access  Public
+router.delete('/date/food', (req, res) => {
+  Day.findOne({ date: req.query.date })
+    .then(day => {
+      if (day.foodEaten.filter(food => food._id.toString() === req.query.food_id).length === 0) {
+        return res.status(404).json({ foodnotfound: 'Food not found' })
+      }
+
+      //get remove index
+      const removeIndex = day.foodEaten
+        .map(food => food._id.toString())
+        .indexOf(req.query.food_id);
+
+      //splice food out of array
+      day.foodEaten.splice(removeIndex, 1);
+
+      //save
+      day.save().then(day => res.json(day));
+
     })
     .catch(err => res.status(404).json({ noday: 'No record found on this date.' }))
 });

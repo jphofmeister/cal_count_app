@@ -1,6 +1,6 @@
 import {
   ADD_DAY,
-  EDIT_DAY,
+  //EDIT_DAY,
   GET_DAY,
   GET_DAYS,
   DELETE_DAY,
@@ -20,12 +20,12 @@ export default function (state = initialState, action) {
         ...state,
         loading: true
       };
+    // case ADD_DAY:
+    //   return {
+    //     ...state,
+    //     day: [action.payload, ...state.day]
+    //   };
     case ADD_DAY:
-      return {
-        ...state,
-        day: [action.payload, ...state.day]
-      };
-    case EDIT_DAY:
       return {
         ...state,
         day: action.payload

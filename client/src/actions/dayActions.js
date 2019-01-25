@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 import {
-  //ADD_DAY,
-  EDIT_DAY,
+  ADD_DAY,
+  //EDIT_DAY,
   GET_DAY,
   GET_DAYS,
   DELETE_DAY,
@@ -12,29 +12,16 @@ import {
 } from './types';
 
 //add day
-export const addDay = (dayData, history) => dispatch => {
+export const addDay = dayData => dispatch => {
   dispatch(clearErrors());
   axios
     .post('api/day', dayData)
-    .then(res =>
-      history.push('/')
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-}
-
-//edit day
-export const editDay = (id, updatedDay) => dispatch => {
-  dispatch(clearErrors());
-  axios
-    .put(`/api/day/${id}`, updatedDay)
+    // .then(res =>
+    //   history.push('/')
+    // )
     .then(res =>
       dispatch({
-        type: EDIT_DAY,
+        type: ADD_DAY,
         payload: res.data
       })
     )
@@ -45,6 +32,25 @@ export const editDay = (id, updatedDay) => dispatch => {
       })
     );
 }
+
+// //edit day
+// export const editDay = (id, updatedDay) => dispatch => {
+//   dispatch(clearErrors());
+//   axios
+//     .put(`/api/day/${id}`, updatedDay)
+//     .then(res =>
+//       dispatch({
+//         type: EDIT_DAY,
+//         payload: res.data
+//       })
+//     )
+//     .catch(err =>
+//       dispatch({
+//         type: GET_ERRORS,
+//         payload: err.response.data
+//       })
+//     );
+// }
 
 //get days
 export const getDays = () => dispatch => {
@@ -100,6 +106,24 @@ export const deleteDay = id => dispatch => {
         payload: err.response.data
       })
     );
+}
+
+//delete food item from day
+export const deleteFoodFromDay = (date, food_id) => dispatch => {
+  axios
+    .delete('/api/day/date/food', { params: { date: date, food_id: food_id } })
+    .then(res =>
+      dispatch({
+        type: GET_DAY,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    )
 }
 
 //set loading state
