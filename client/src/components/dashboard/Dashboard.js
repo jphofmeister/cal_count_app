@@ -10,14 +10,11 @@ import { Row } from 'reactstrap';
 class Dashboard extends Component {
   render() {
     return (
-      <div>
-        {/* <h1 className="col">Dashboard</h1> */}
+      <div className="grid-container">
         <Week />
-        <Row className="mr-0 ml-0">
-          <Today />
-          <Food />
-          <Ingredients />
-        </Row>
+        <Today />
+        <Food />
+        <Ingredients />
       </div>
     )
   }

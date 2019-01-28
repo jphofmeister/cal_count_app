@@ -4,9 +4,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getFoods, deleteFood } from '../../actions/foodActions';
 
-import TableItem from '../common/TableItem';
+import FoodIngredientTable from '../common/FoodIngredientTable';
 import Spinner from '../common/Spinner';
-import { Button, Col, Table } from 'reactstrap';
+import { Button, Col } from 'reactstrap';
+// import styled from 'styled-components';
+
+// const ColCard = styled(Col)`
+//   border-radius: 8px;
+//   background-color: #fff;
+// `;
 
 class Food extends Component {
   constructor(props) {
@@ -24,25 +30,22 @@ class Food extends Component {
 
   render() {
     const { foods, loading } = this.props.food;
+    const headings = ['Foods', 'Calories', ''];
 
     let foodContent;
 
     if (foods === null || loading) {
       foodContent = <Spinner />
     } else {
-      foodContent = <Table>
-        <tbody>
-          <TableItem items={foods} onDeleteClick={this.onDeleteClick} />
-        </tbody>
-      </Table>
+      foodContent = <FoodIngredientTable items={foods} headings={headings} onDeleteClick={this.onDeleteClick} />
     }
 
     return (
-      <Col xs="6">
+      <div className="food card">
         <h3>Food</h3>
         <Button tag={Link} to="/create-food" color="primary">+ Create Food</Button>
         {foodContent}
-      </Col>
+      </div>
     )
   }
 }

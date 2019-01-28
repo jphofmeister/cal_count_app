@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { Table, Col } from 'reactstrap';
+//import styled from 'styled-components';
+
+// const ColCard = styled(Col)`
+//   border-radius: 8px;
+//   background-color: #fff;
+// `;
 
 class Week extends Component {
   render() {
     return (
-      <Col>
+      <div className="week card">
         <h2>This Week</h2>
         <Table>
           <thead>
@@ -30,7 +36,7 @@ class Week extends Component {
             </tr>
           </tbody>
         </Table>
-      </Col>
+      </div>
     )
   }
 }

@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
-import { Input, Col, Table } from 'reactstrap';
-import { isToday } from 'date-fns';
+import { Input, Col } from 'reactstrap';
+//import { isToday } from 'date-fns';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 //import { Link } from 'react-router-dom';
 import { getDays, getDay, deleteFoodFromDay } from '../../actions/dayActions';
 
-import TableItem from '../common/TableItem';
+import FoodIngredientTable from '../common/FoodIngredientTable';
 import Spinner from '../common/Spinner';
+
+// import styled from 'styled-components';
+
+// const ColCard = styled(Col)`
+//   border-radius: 8px;
+//   background-color: #fff;
+// `;
 
 class Today extends Component {
   constructor(props) {
@@ -44,26 +51,22 @@ class Today extends Component {
     //if (this.props.day) {
     const { day, loading } = this.props.day;
     const { foodEaten } = day;
+    const headings = ['Food', 'Calories', ' '];
 
     let dayContent;
 
     if (foodEaten === null || foodEaten === undefined || loading) {
       dayContent = <Spinner />
     } else {
-      dayContent = <Table>
-        <tbody>
-          <TableItem items={foodEaten} onDeleteClick={this.onDeleteFood} />
-        </tbody>
-      </Table>
+      dayContent = <FoodIngredientTable items={foodEaten} headings={headings} onDeleteClick={this.onDeleteFood} />
     }
 
-
     return (
-      <Col xs="3">
-        <h3>Today {this.state.date}</h3>
+      <div className="today card">
+        <h3>Today's Calories</h3>
         <Input name="date" type="date" value={this.state.date} onChange={this.onChange} />
         {dayContent}
-      </Col>
+      </div>
     )
   }
 }

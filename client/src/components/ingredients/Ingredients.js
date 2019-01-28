@@ -4,10 +4,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getIngredients, deleteIngredient } from '../../actions/ingredientActions';
 
-//import IngredientList from './IngredientList';
-import TableItem from '../common/TableItem';
+import FoodIngredientTable from '../common/FoodIngredientTable';
 import Spinner from '../common/Spinner';
-import { Button, Col, Table } from 'reactstrap';
+import { Button, Col } from 'reactstrap';
+// import styled from 'styled-components';
+
+// const ColCard = styled(Col)`
+//   border-radius: 8px;
+//   background-color: #fff;
+// `;
 
 class Ingredients extends Component {
   constructor(props) {
@@ -25,25 +30,22 @@ class Ingredients extends Component {
 
   render() {
     const { ingredients, loading } = this.props.ingredient;
+    const headings = ['Ingredients', 'Calories', ' ']
 
     let ingredientContent;
 
     if (ingredients === null || loading) {
       ingredientContent = <Spinner />
     } else {
-      ingredientContent = <Table>
-        <tbody>
-          <TableItem items={ingredients} onDeleteClick={this.onDeleteClick} />
-        </tbody>
-      </Table>
+      ingredientContent = <FoodIngredientTable items={ingredients} headings={headings} onDeleteClick={this.onDeleteClick} />
     }
 
     return (
-      <Col xs="3">
+      <div className="ingredients card">
         <h3>Ingredients</h3>
         <Button tag={Link} to="/create-ingredient" color="primary">+ Create Ingredient</Button>
         {ingredientContent}
-      </Col>
+      </div>
     )
   }
 }
