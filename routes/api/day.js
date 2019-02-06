@@ -58,7 +58,7 @@ router.post('/', (req, res) => {
         ).then(day => res.json(day))
       } else {
         //doesn't exist, create
-        new Day(newDay).save().then(day => res.json(day));
+        new Day(dayData).save().then(day => res.json(day));
       }
     })
     .catch(err => res.status(404).json(err));

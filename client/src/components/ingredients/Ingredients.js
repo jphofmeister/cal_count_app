@@ -41,7 +41,7 @@ class Ingredients extends Component {
     }
 
     return (
-      <div className="ingredients card">
+      <div className="ingredients card-style">
         <h3>Ingredients</h3>
         <Button tag={Link} to="/create-ingredient" color="primary">+ Create Ingredient</Button>
         {ingredientContent}

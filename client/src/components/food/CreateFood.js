@@ -42,10 +42,10 @@ class CreateFood extends Component {
     this.props.getIngredients();
   }
 
-  onAddIngredient(id, ingCalories, e) {
+  onAddIngredient(id, ingredientCal, e) {
     e.preventDefault();
 
-    let newCalories = this.state.calories + ingCalories;
+    let newCalories = this.state.calories + ingredientCal;
 
     this.setState({
       foodIngredients: [...this.state.foodIngredients, id],

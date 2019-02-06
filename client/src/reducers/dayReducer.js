@@ -4,6 +4,7 @@ import {
   GET_DAY,
   GET_DAYS,
   DELETE_DAY,
+  DELETE_FOOD_FROM_DAY,
   DAY_LOADING
 } from '../actions/types';
 

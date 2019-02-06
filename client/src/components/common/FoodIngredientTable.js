@@ -24,7 +24,7 @@ const TableStyle = styled(Table)`
 const IconButton = styled.button`
   border: none;
   color: #2E58E7;
-  padding: 5px 10px;
+  padding: 7px 12px;
   border-radius: 50%;
 
   :hover {
