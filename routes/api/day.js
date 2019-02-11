@@ -42,9 +42,7 @@ router.post('/', (req, res) => {
 
   const dayData = {};
   if (req.body.date) dayData.date = req.body.date;
-  if (typeof req.body.foodEaten != 'undefined') {
-    dayData.foodEaten = req.body.foodEaten.split(',');
-  }
+  if (req.body.foodEaten) dayData.foodEaten = req.body.foodEaten;
   if (req.body.calories) dayData.calories = req.body.calories;
 
   Day.findOne({ date: req.body.date })

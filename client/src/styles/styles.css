@@ -1,8 +1,9 @@
 html, body {
-  background-color: #E7EBF3;
+  /* background-color: #E7EBF3; */
+  background-color: #fef6f3;
   /* font-family: 'Montserrat', sans-serif; */
   font-family: 'Cabin', sans-serif;
-  color: #1A1A1A;
+  color: #393230 !important;
 }  
 
 h1, h2, h3 {
@@ -11,6 +12,31 @@ h1, h2, h3 {
 
 h3 {
   font-size: 24px;
+}
+
+a {
+  color: #5677E8;
+}
+
+.btn {
+  padding: .375rem 2rem;
+  -webkit-font-smoothing: antialiased;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-primary {
+  background-color: #1A9972;
+}
+
+.btn-primary:hover {
+  background-color: #167E5E;
+  box-shadow: 0 3px 4px rgba(0,0,0,.2);
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+  background-color: #167E5E;
 }
 
 .grid-container {
@@ -55,7 +81,7 @@ h3 {
   grid-column-start: 2;
   grid-row-end: 3;
   grid-column-end: 4; */
-  grid-area: 1 / 2 / 1 / 5;
+  grid-area: 1 / 2 / 2 / 5;
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: repeat(3, 1fr);

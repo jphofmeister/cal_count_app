@@ -7,6 +7,10 @@ import PropTypes from 'prop-types';
 class FoodOnDate extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      foodEaten: [],
+      calories: 0
+    }
     this.handleChangeDate = this.handleChangeDate.bind(this);
     this.handleDeleteFoodFromDay = this.handleDeleteFoodFromDay.bind(this);
   }

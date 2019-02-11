@@ -121,7 +121,7 @@ class CreateFood extends Component {
     }
 
     // these are the ingredients that have been added to the food
-    let foodIngredientList = ingredients.map((ingredient) => {
+    let ingredientsAddedToFood = ingredients.map((ingredient) => {
       if (!this.state.foodIngredients.includes(ingredient._id)) return null;
 
       return (<tr key={ingredient._id}>
@@ -159,7 +159,7 @@ class CreateFood extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {foodIngredientList}
+                      {ingredientsAddedToFood}
                     </tbody>
                   </Table>
                 </FormGroup>

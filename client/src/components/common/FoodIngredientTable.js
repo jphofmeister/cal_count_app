@@ -23,13 +23,13 @@ const TableStyle = styled(Table)`
 
 const IconButton = styled.button`
   border: none;
-  color: #2E58E7;
+  color: #5677E8;
   padding: 7px 12px;
   border-radius: 50%;
 
   :hover {
     cursor: pointer;
-    background-color: #E7EBF3;
+    background-color: #EDEAE9;
   }
 `;
 

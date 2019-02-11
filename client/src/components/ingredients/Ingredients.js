@@ -6,7 +6,7 @@ import { getIngredients, deleteIngredient } from '../../actions/ingredientAction
 
 import FoodIngredientTable from '../common/FoodIngredientTable';
 import Spinner from '../common/Spinner';
-import { Button, Col } from 'reactstrap';
+import { Button } from 'reactstrap';
 // import styled from 'styled-components';
 
 // const ColCard = styled(Col)`

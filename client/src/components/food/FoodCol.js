@@ -22,7 +22,7 @@ const FoodCol = ({ foods, loading, foodToFilter, onAddClick, onDeleteClick }) =>
     filteredFoodContent = <FoodIngredientTable
       items={filteredFood}
       headings={headings}
-      onAddClick={(id) => onAddClick(id)}
+      onAddClick={(id, calories, e) => onAddClick(id, calories, e)}
       onDeleteClick={(id) => onDeleteClick(id)} />
   }
 
@@ -35,7 +35,7 @@ const FoodCol = ({ foods, loading, foodToFilter, onAddClick, onDeleteClick }) =>
 }
 
 FoodCol.propTypes = {
-  onAddClick: PropTypes.func,
+  //onAddClick: PropTypes.func,
   onDeleteClick: PropTypes.func
 }
 

@@ -15,7 +15,7 @@ import {
 export const addDay = dayData => dispatch => {
   dispatch(clearErrors());
   axios
-    .post('api/day', dayData)
+    .post('/api/day', dayData)
     // .then(res =>
     //   history.push('/')
     // )

@@ -8,12 +8,15 @@ import Dashboard from './components/dashboard/Dashboard';
 import CreateIngredient from './components/ingredients/CreateIngredient';
 import CreateFood from './components/food/CreateFood';
 
+import Header from './components/layout/Header';
+
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <Router>
           <div>
+            <Header />
             <Route exact path="/" component={Dashboard} />
             <Switch>
               <Route exact path="/create-food" component={CreateFood} />
