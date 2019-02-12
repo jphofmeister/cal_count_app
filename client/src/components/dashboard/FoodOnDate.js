@@ -7,10 +7,6 @@ import PropTypes from 'prop-types';
 class FoodOnDate extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      foodEaten: [],
-      calories: 0
-    }
     this.handleChangeDate = this.handleChangeDate.bind(this);
     this.handleDeleteFoodFromDay = this.handleDeleteFoodFromDay.bind(this);
   }
@@ -19,22 +15,22 @@ class FoodOnDate extends Component {
     this.props.onChange(e.target.value);
   }
 
-  handleDeleteFoodFromDay(id) {
-    this.props.onDeleteClick(id);
+  handleDeleteFoodFromDay(id, calories) {
+    this.props.onDeleteClick(id, calories);
   }
 
   render() {
     //if (this.props.day) {
     const { day, loading } = this.props;
-    const { foodEaten } = day;
+    const { foodAddedToDay } = this.props;
     const headings = ['Food', 'Calories', ' '];
 
     let dayContent;
 
-    if (foodEaten === null || foodEaten === undefined || loading) {
-      dayContent = <Spinner />
+    if (foodAddedToDay === null || foodAddedToDay === undefined || loading) {
+      dayContent = "No food added today"
     } else {
-      dayContent = <FoodIngredientTable items={foodEaten} headings={headings} onDeleteClick={this.handleDeleteFoodFromDay} />
+      dayContent = <FoodIngredientTable items={foodAddedToDay} headings={headings} onDeleteClick={this.handleDeleteFoodFromDay} />
     }
 
     return (
@@ -46,6 +42,9 @@ class FoodOnDate extends Component {
           onChange={this.handleChangeDate}
           value={this.props.date} />
         {dayContent}
+        <div>
+          Total Calories: {this.props.calories}
+        </div>
       </div>
     )
   }

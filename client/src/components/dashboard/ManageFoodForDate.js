@@ -7,13 +7,11 @@ import { getFoods, deleteFood } from '../../actions/foodActions';
 
 import isEmpty from '../../validation/is-empty';
 
-//import FoodOnDate from './FoodOnDate';
+import FoodOnDate from './FoodOnDate';
 import FoodCol from '../food/FoodCol';
-//import Spinner from '../common/Spinner';
 
 import { Link } from 'react-router-dom';
-import { Input, Button, Table } from 'reactstrap';
-//import FoodIngredientTable from '../common/FoodIngredientTable';
+import { Button } from 'reactstrap';
 
 class ManageFoodForDate extends Component {
   constructor(props) {
@@ -29,6 +27,7 @@ class ManageFoodForDate extends Component {
     this.onDeleteFood = this.onDeleteFood.bind(this);
     this.onAddFoodToDay = this.onAddFoodToDay.bind(this);
     this.updateDay = this.updateDay.bind(this);
+    this.subtractCalories = this.subtractCalories.bind(this);
   }
 
   componentDidMount() {
@@ -37,7 +36,6 @@ class ManageFoodForDate extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.state.foodEaten);
     const { day } = this.props.day;
 
     let newDate = this.state.date;
@@ -79,6 +77,31 @@ class ManageFoodForDate extends Component {
     }, () => this.updateDay());
   }
 
+  onDeleteFoodFromDay(id, foodCal) {
+    //remove food from day in database
+    let date = this.state.date;
+    this.props.deleteFoodFromDay(date, id);
+
+    //get index
+    const removeIndex = this.state.foodEaten
+      .map(food => food.toString())
+      .indexOf(id);
+
+    //remove food from foodEaten state
+    this.setState((prevState) => ({
+      foodEaten: [...prevState.foodEaten.slice(0, removeIndex), ...prevState.foodEaten.slice(removeIndex + 1)]
+    }));
+
+    this.subtractCalories(foodCal);
+  }
+
+  subtractCalories(foodCal) {
+    let newCalories = this.state.calories - foodCal;
+    this.setState({
+      calories: newCalories
+    }, () => this.updateDay())
+  }
+
   updateDay() {
     const dayData = {
       date: this.state.date,
@@ -89,56 +112,37 @@ class ManageFoodForDate extends Component {
     this.props.addDay(dayData);
   }
 
-  onDeleteFoodFromDay(id) {
-    let date = this.state.date;
-    this.props.deleteFoodFromDay(date, id);
-  }
-
   onDeleteFood(id) {
     this.props.deleteFood(id);
   }
 
   render() {
-    //const { day, loading } = this.props.day;
+    const { day, loading } = this.props.day;
     const { foods } = this.props.food;
 
     let foodAddedToDay = foods.map(food => {
       if (!this.state.foodEaten.includes(food._id)) return null;
 
-      return (
-        <tr key={food._id}>
-          <td>{food.name}</td>
-          <td>{food.calories}</td>
-        </tr>
-      );
+      return ({
+        _id: food._id,
+        name: food.name,
+        calories: food.calories
+      });
     });
+
+    let filteredFoodAddedToDay = foodAddedToDay.filter(Boolean);
 
     return (
       <div className="day-food-grid">
-        {/* <FoodOnDate day={day} date={this.state.date} onChange={this.onChangeDate} onDeleteClick={this.onDeleteFoodFromDay} /> */}
-        {/* <FoodOnDate day={day} foodEaten={this.state.foodEaten} date={this.state.date} onChange={this.onChangeDate} onDeleteClick={this.onDeleteFoodFromDay} /> */}
-        {/* <Food foods={foods} onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} /> */}
-        {/* {foodAddedToDayContent} */}
-        <div className="day card-style">
-          <h3>Today's Calories</h3>
-          <Input
-            name="date"
-            type="date"
-            onChange={this.onChangeDate}
-            value={this.state.date} />
-          <Table>
-            <thead>
-              <tr>
-                <th>Food</th>
-                <th>Calories</th>
-              </tr>
-            </thead>
-            <tbody>
-              {foodAddedToDay}
-            </tbody>
-          </Table>
-          Total Calories: {this.state.calories}
-        </div>
+
+        <FoodOnDate
+          day={day}
+          date={this.state.date}
+          foodAddedToDay={filteredFoodAddedToDay}
+          calories={this.state.calories}
+          onChange={this.onChangeDate}
+          onDeleteClick={this.onDeleteFoodFromDay} />
+
         <div className="food card-style">
           <h3>Food</h3>
           <Button tag={Link} to="/create-food" color="primary">+ Create Food</Button>
