@@ -64,8 +64,8 @@ class ManageFoodForDate extends Component {
     }
   }
 
-  onChangeDate(e) {
-    this.setState({ date: e.target.value }, this.props.getDay(e.target.value));
+  onChangeDate(newDate) {
+    this.setState({ date: newDate }, () => this.props.getDay(newDate));
   }
 
   onAddFoodToDay(id, foodCal) {

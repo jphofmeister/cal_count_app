@@ -12,7 +12,8 @@ class FoodOnDate extends Component {
   }
 
   handleChangeDate(e) {
-    this.props.onChange(e.target.value);
+    let newDate = e.target.value;
+    this.props.onChange(newDate);
   }
 
   handleDeleteFoodFromDay(id, calories) {
