@@ -118,6 +118,9 @@ router.delete('/date/food', (req, res) => {
       //splice food out of array
       day.foodEaten.splice(removeIndex, 1);
 
+      //get new calorie count
+      day.calories -= req.query.calories;
+
       //save
       day.save().then(day => res.json(day));
 

@@ -20,8 +20,7 @@ class FoodOnDate extends Component {
     this.handleChangeDate = this.handleChangeDate.bind(this);
     //this.handleDeleteFoodFromDay = this.handleDeleteFoodFromDay.bind(this);
     this.onDeleteFoodFromDay = this.onDeleteFoodFromDay.bind(this);
-    this.subtractCalories = this.subtractCalories.bind(this);
-    this.updateDay = this.updateDay.bind(this);
+    //this.updateDay = this.updateDay.bind(this);
   }
 
   componentDidMount() {
@@ -47,46 +46,7 @@ class FoodOnDate extends Component {
   onDeleteFoodFromDay(id, foodCal) {
     //remove food from day in database
     let date = this.state.date;
-    this.props.deleteFoodFromDay(date, id);
-    this.subtractCalories(foodCal);
-
-    // if (this.state.foodEaten.length > 1) {
-    //   //get index
-    //   const removeIndex = this.state.foodEaten
-    //     .map(food => food.toString())
-    //     .indexOf(id);
-
-    //   //remove food from foodEaten state
-    //   this.setState((prevState) => ({
-    //     foodEaten: [...prevState.foodEaten.slice(0, removeIndex), ...prevState.foodEaten.slice(removeIndex + 1)]
-    //   }));
-
-    //   this.subtractCalories(foodCal);
-    // } else {
-    //   this.setState({
-    //     foodEaten: [],
-    //     calories: 0
-    //   }, () => this.updateDay())
-    // }
-  }
-
-  subtractCalories(foodCal) {
-    let newCalories = this.state.calories - foodCal;
-    this.setState({
-      calories: newCalories
-    }, () => this.updateDay());
-  }
-
-  updateDay() {
-    const dayData = {
-      date: this.state.date,
-      foodEaten: this.state.foodEaten,
-      calories: this.state.calories
-    }
-
-    this.props.addDay(dayData);
-
-    //console.log(`this is the state after updateDay is called ${this.state}`);
+    this.props.deleteFoodFromDay(date, id, foodCal);
   }
 
   // handleDeleteFoodFromDay(id, calories) {

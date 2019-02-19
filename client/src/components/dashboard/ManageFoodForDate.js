@@ -82,31 +82,35 @@ class ManageFoodForDate extends Component {
 
   // onDeleteFoodFromDay(id, foodCal) {
   //   //remove food from day in database
-  //   let date = this.state.date;
+  //   const { day } = this.props.day;
+
+  //   let date = day.date;
   //   this.props.deleteFoodFromDay(date, id);
+  //   this.subtractCalories(foodCal);
 
-  //   if (this.state.foodEaten.length > 1) {
-  //     //get index
-  //     const removeIndex = this.state.foodEaten
-  //       .map(food => food.toString())
-  //       .indexOf(id);
+  // if (this.state.foodEaten.length > 1) {
+  //   //get index
+  //   const removeIndex = this.state.foodEaten
+  //     .map(food => food.toString())
+  //     .indexOf(id);
 
-  //     //remove food from foodEaten state
-  //     this.setState((prevState) => ({
-  //       foodEaten: [...prevState.foodEaten.slice(0, removeIndex), ...prevState.foodEaten.slice(removeIndex + 1)]
-  //     }));
+  //   //remove food from foodEaten state
+  //   this.setState((prevState) => ({
+  //     foodEaten: [...prevState.foodEaten.slice(0, removeIndex), ...prevState.foodEaten.slice(removeIndex + 1)]
+  //   }));
 
-  //     this.subtractCalories(foodCal);
-  //   } else {
-  //     this.setState({
-  //       foodEaten: [],
-  //       calories: 0
-  //     }, () => this.updateDay())
-  //   }
+  //   this.subtractCalories(foodCal);
+  // } else {
+  //   this.setState({
+  //     foodEaten: [],
+  //     calories: 0
+  //   }, () => this.updateDay())
   // }
+  //}
 
   // subtractCalories(foodCal) {
-  //   let newCalories = this.state.calories - foodCal;
+  //   const { day } = this.props.day;
+  //   let newCalories = day.calories - foodCal;
   //   this.setState({
   //     calories: newCalories
   //   }, () => this.updateDay())
@@ -120,7 +124,6 @@ class ManageFoodForDate extends Component {
   //   }
 
   //   this.props.addDay(dayData);
-  //   console.log(`this is the state after updateDay is called ${this.state}`);
   // }
 
   onDeleteFood(id) {
@@ -157,7 +160,7 @@ class ManageFoodForDate extends Component {
         //calories={this.state.calories}
         foods={foods}
         onChange={this.onChangeDate}
-      //onDeleteClick={this.onDeleteFoodFromDay} 
+      //onDeleteClick={this.onDeleteFoodFromDay}
       />
     }
 

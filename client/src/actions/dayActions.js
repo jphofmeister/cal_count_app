@@ -90,9 +90,9 @@ export const deleteDay = id => dispatch => {
 }
 
 //delete food item from day
-export const deleteFoodFromDay = (date, food_id) => dispatch => {
+export const deleteFoodFromDay = (date, food_id, calories) => dispatch => {
   axios
-    .delete('/api/day/date/food', { params: { date: date, food_id: food_id } })
+    .delete('/api/day/date/food', { params: { date: date, food_id: food_id, calories: calories } })
     .then(res => dispatch(getDay(date)))
     .catch(err =>
       dispatch({
