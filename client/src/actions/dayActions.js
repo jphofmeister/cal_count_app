@@ -12,19 +12,21 @@ import {
 } from './types';
 
 //add day
-export const addDay = dayData => dispatch => {
+export const addDay = (date, dayData) => dispatch => {
   dispatch(clearErrors());
   axios
     .post('/api/day', dayData)
     // .then(res =>
     //   history.push('/')
     // )
-    .then(res =>
-      dispatch({
-        type: ADD_DAY,
-        payload: res.data
-      })
-    )
+
+    // .then(res =>
+    //   dispatch({
+    //     type: ADD_DAY,
+    //     payload: res.data
+    //   })
+    // )
+    .then(res => dispatch(getDay(date)))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

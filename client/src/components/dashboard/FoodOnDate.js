@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import FoodIngredientTable from '../common/FoodIngredientTable';
-import Spinner from '../common/Spinner';
 import { Input } from 'reactstrap';
 import PropTypes from 'prop-types';
 import isEmpty from '../../validation/is-empty';
@@ -18,9 +17,7 @@ class FoodOnDate extends Component {
     }
 
     this.handleChangeDate = this.handleChangeDate.bind(this);
-    //this.handleDeleteFoodFromDay = this.handleDeleteFoodFromDay.bind(this);
     this.onDeleteFoodFromDay = this.onDeleteFoodFromDay.bind(this);
-    //this.updateDay = this.updateDay.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +31,7 @@ class FoodOnDate extends Component {
         date: day.date,
         foodEaten: foodEatenIds,
         calories: day.calories
-      }, () => console.log(this.state));
+      });
     }
   }
 
@@ -48,10 +45,6 @@ class FoodOnDate extends Component {
     let date = this.state.date;
     this.props.deleteFoodFromDay(date, id, foodCal);
   }
-
-  // handleDeleteFoodFromDay(id, calories) {
-  //   this.props.onDeleteClick(id, calories);
-  // }
 
   render() {
     const { day, loading, foods } = this.props;
