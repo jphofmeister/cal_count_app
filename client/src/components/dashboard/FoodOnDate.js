@@ -28,7 +28,7 @@ class FoodOnDate extends Component {
       day.calories = !isEmpty(day.calories) ? day.calories : 0;
 
       this.setState({
-        date: day.date,
+        date: this.props.date,
         foodEaten: foodEatenIds,
         calories: day.calories
       });
@@ -56,7 +56,8 @@ class FoodOnDate extends Component {
       return ({
         _id: food._id,
         name: food.name,
-        calories: food.calories
+        calories: food.calories,
+        quantity: 2
       });
     });
 
@@ -77,7 +78,7 @@ class FoodOnDate extends Component {
           name="date"
           type="date"
           onChange={this.handleChangeDate}
-          value={this.state.date} />
+          value={this.props.date} />
         {dayContent}
         <div>
           Total Calories: {this.state.calories}

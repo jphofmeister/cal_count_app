@@ -36,16 +36,28 @@ class ManageFoodForDate extends Component {
 
   onChangeDate(newDate) {
     this.props.getDay(newDate);
+    this.setState({
+      date: newDate
+    });
   }
 
   onAddFoodToDay(id, foodCal) {
     const { day } = this.props.day;
 
-    let newCalories = day.calories + foodCal;
+    let newFoodEaten;
+    let newCalories;
+
+    if (day === null) {
+      newFoodEaten = [id];
+      newCalories = foodCal;
+    } else {
+      newFoodEaten = [...day.foodEaten, id];
+      newCalories = day.calories + foodCal;
+    }
 
     this.setState({
-      date: day.date,
-      foodEaten: [...day.foodEaten, id],
+      //date: this.state.date,
+      foodEaten: newFoodEaten,
       calories: newCalories
     }, () => this.updateDay());
   }
@@ -73,7 +85,7 @@ class ManageFoodForDate extends Component {
     if (loading) {
       foodOnDateContent = <Spinner />;
     } else {
-      foodOnDateContent = <FoodOnDate day={day} foods={foods} onChange={this.onChangeDate} />
+      foodOnDateContent = <FoodOnDate day={day} date={this.state.date} foods={foods} onChange={this.onChangeDate} />
     }
 
     return (

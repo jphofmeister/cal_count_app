@@ -65,29 +65,29 @@ router.post('/', (req, res) => {
 // @route   PUT api/day/:id
 // @desc    edit food record of a single day
 // @access  Public
-router.put('/:id', (req, res) => {
-  const { errors, isValid } = valDayInput(req.body);
+// router.put('/:id', (req, res) => {
+//   const { errors, isValid } = valDayInput(req.body);
 
-  // check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
+//   // check validation
+//   if (!isValid) {
+//     return res.status(400).json(errors);
+//   }
 
-  const updatedDay = {};
-  if (req.body.date) updatedDay.date = req.body.date;
-  if (typeof req.body.foodEaten != 'undefined') {
-    updatedDay.foodEaten = req.body.foodEaten.split(',');
-  }
-  if (req.body.calories) updatedDay.calories = req.body.calories;
+//   const updatedDay = {};
+//   if (req.body.date) updatedDay.date = req.body.date;
+//   if (typeof req.body.foodEaten != 'undefined') {
+//     updatedDay.foodEaten = req.body.foodEaten.split(',');
+//   }
+//   if (req.body.calories) updatedDay.calories = req.body.calories;
 
-  Day.findOneAndUpdate(
-    { _id: req.params.id },
-    { $set: updatedDay },
-    { new: true }
-  )
-    .then(day => res.json(day))
-    .catch(err => res.status(404).json(err));
-});
+//   Day.findOneAndUpdate(
+//     { _id: req.params.id },
+//     { $set: updatedDay },
+//     { new: true }
+//   )
+//     .then(day => res.json(day))
+//     .catch(err => res.status(404).json(err));
+// });
 
 // @route   DELETE api/day/date
 // @desc    remove food record of a single day

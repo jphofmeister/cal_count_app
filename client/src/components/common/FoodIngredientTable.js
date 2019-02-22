@@ -54,6 +54,11 @@ const FoodIngredientTable = ({
       }
       <td>{item.name}</td>
       <td>{item.calories}</td>
+      {item.quantity &&
+        <td>
+          {item.quantity}
+        </td>
+      }
       {onDeleteClick &&
         <td>
           <IconButton onClick={() => onDeleteClick(item._id, item.calories)}>
