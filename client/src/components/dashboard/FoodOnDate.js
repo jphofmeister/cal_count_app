@@ -22,6 +22,8 @@ class FoodOnDate extends Component {
 
   componentDidMount() {
     const { day } = this.props;
+
+    // if props.day doesn't equal null, set the state equal to it
     if (day !== null) {
       let foodEatenIds = !isEmpty(day.foodEaten) ? day.foodEaten.map(food => food._id) : [];
       day.date = !isEmpty(day.date) ? day.date.slice(0, 10) : new Date().toISOString().slice(0, 10);
@@ -36,6 +38,7 @@ class FoodOnDate extends Component {
   }
 
   handleChangeDate(e) {
+    //pass the selected date to the parent component
     let newDate = e.target.value;
     this.props.onChange(newDate);
   }
@@ -48,21 +51,32 @@ class FoodOnDate extends Component {
 
   render() {
     const { day, loading, foods } = this.props;
-    const headings = ['Food', 'Calories', ' '];
+    const headings = ['Food', 'Qty', 'Cal', ' '];
 
     let foodAddedToDay = foods.map(food => {
+      // if any food is not found in foodEaten, return null
       if (!this.state.foodEaten.includes(food._id)) return null;
+
+      //count each time a food is listed in foodEaten
+      let counts = 0;
+      this.state.foodEaten.forEach(foodOfToday => {
+        if (foodOfToday === food._id) {
+          counts++;
+        }
+      });
 
       return ({
         _id: food._id,
         name: food.name,
         calories: food.calories,
-        quantity: 2
+        quantity: counts
       });
     });
 
+    //filter out the nulls so we don't receive errors later
     let filteredFoodAddedToDay = foodAddedToDay.filter(Boolean);
 
+    //check if any food is added to today before setting the FoodIngredientTable
     let dayContent;
 
     if (filteredFoodAddedToDay === null || filteredFoodAddedToDay === undefined || loading) {
