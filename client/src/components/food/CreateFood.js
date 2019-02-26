@@ -16,6 +16,34 @@ import food_type_meal from './images/food_type_meal.png';
 import food_type_snack from './images/food_type_snack.png';
 import food_type_beverage from './images/food_type_beverage.png';
 
+import styled from 'styled-components';
+
+const FormGrid = styled(Form)`
+  display: grid;
+  width: 100%;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 30px;
+  align-items: start;
+  justify-items: stretch;
+`;
+
+const MainForm = styled.div`
+  /* grid-row-start: 1;
+  grid-column-start: 1;
+  grid-row-end: 2;
+  grid-column-end: 5; */
+  grid-area: 1 / 1 / 2 / 2;
+`;
+
+const IngredientsToAdd = styled.div`
+  grid-area: 1 / 2 / 4 / 3;
+`;
+
+const ButtonContainer = styled.div`
+  grid-area: 2 / 1 / 3 / 2;
+`;
+
 class CreateFood extends Component {
   constructor(props) {
     super(props);
@@ -140,45 +168,48 @@ class CreateFood extends Component {
     return (
       <Container>
         <h1>Create Food Item</h1>
-        <Form onSubmit={this.onSubmit}>
-          <Row>
-            <Col>
-              <TextInput name="name" labelText="Name" placeholder="Enter food name" value={this.state.name} onChange={this.onChange} error={errors.name} />
+        <FormGrid onSubmit={this.onSubmit}>
+          {/* <Row>
+            <Col> */}
+          <MainForm>
+            <TextInput name="name" labelText="Name" placeholder="Enter food name" value={this.state.name} onChange={this.onChange} error={errors.name} />
 
-              <RadioButtons legend="Food Type" options={radioOptions} error={errors.foodType} />
+            <RadioButtons legend="Food Type" options={radioOptions} error={errors.foodType} />
 
-              {/* if ingredients are not hidden, then show */}
-              {!this.state.areIngredientsHidden ?
-                <FormGroup>
-                  <p>Added Ingredients:</p>
-                  <Table>
-                    <thead style={{ display: 'none' }}>
-                      <tr>
-                        <th>Ingredient Name</th>
-                        <th>Calories</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {ingredientsAddedToFood}
-                    </tbody>
-                  </Table>
-                </FormGroup>
-                : null
-              }
+            {/* if ingredients are not hidden, then show */}
+            {!this.state.areIngredientsHidden ?
+              <FormGroup>
+                <p>Added Ingredients:</p>
+                <Table>
+                  <thead style={{ display: 'none' }}>
+                    <tr>
+                      <th>Ingredient Name</th>
+                      <th>Calories</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {ingredientsAddedToFood}
+                  </tbody>
+                </Table>
+              </FormGroup>
+              : null
+            }
 
-              {/* if calories are not hidden, then show */}
-              {!this.state.areCaloriesHidden ?
-                <TextInput type="number" name="calories" labelText="Calories" placeholder="Enter total calories for this food" value={this.state.calories} onChange={this.onChange} readOnly={this.state.areCaloriesReadOnly} error={errors.name} />
-                : null
-              }
-            </Col>
+            {/* if calories are not hidden, then show */}
+            {!this.state.areCaloriesHidden ?
+              <TextInput type="number" name="calories" labelText="Calories" placeholder="Enter total calories for this food" value={this.state.calories} onChange={this.onChange} readOnly={this.state.areCaloriesReadOnly} error={errors.name} />
+              : null
+            }
+          </MainForm>
 
-            {/* below is the list of ingredients you pick from */}
-            <Col>{ingredientList}</Col>
-          </Row>
-          <Button type="submit" color="primary">Submit</Button>
-          <Button onClick={this.onCancelClick}>Cancel</Button>
-        </Form >
+          {/* below is the list of ingredients you pick from */}
+          <IngredientsToAdd>{ingredientList}</IngredientsToAdd>
+          <ButtonContainer>
+            <Button type="submit" color="primary" className="mr-3">Submit</Button>
+            <Button onClick={this.onCancelClick}>Cancel</Button>
+          </ButtonContainer>
+
+        </FormGrid>
       </Container >
     )
   }

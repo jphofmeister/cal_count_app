@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import FoodIngredientTable from '../common/FoodIngredientTable';
 import Spinner from '../common/Spinner';
-import { Button } from 'reactstrap';
 
 class Food extends Component {
   constructor(props) {
@@ -62,7 +60,6 @@ class Food extends Component {
     return (
       <div className="food card-style">
         <h3>Food</h3>
-        <Button tag={Link} to="/create-food" color="primary">+ Create Food</Button>
         <div className="meal">
           <h4>Meals</h4>
           {mealContent}

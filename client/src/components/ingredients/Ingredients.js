@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap';
+
 import { getIngredients, deleteIngredient } from '../../actions/ingredientActions';
 
 import FoodIngredientTable from '../common/FoodIngredientTable';
 import Spinner from '../common/Spinner';
-import { Button } from 'reactstrap';
+
 // import styled from 'styled-components';
 
 // const ColCard = styled(Col)`
