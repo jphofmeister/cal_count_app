@@ -35,25 +35,6 @@ export const addDay = (date, dayData) => dispatch => {
     );
 }
 
-//get days
-export const getDays = () => dispatch => {
-  dispatch(setDayLoading());
-  axios
-    .get('/api/day')
-    .then(res =>
-      dispatch({
-        type: GET_DAYS,
-        payload: res.data
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_DAYS,
-        payload: null
-      })
-    );
-}
-
 //get day
 export const getDay = newDate => dispatch => {
   dispatch(setDayLoading());
@@ -68,6 +49,25 @@ export const getDay = newDate => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_DAY,
+        payload: null
+      })
+    );
+}
+
+//get days
+export const getDays = week => dispatch => {
+  //dispatch(setDayLoading());
+  axios
+    .get('/api/day', { params: { week: week } })
+    .then(res =>
+      dispatch({
+        type: GET_DAYS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_DAYS,
         payload: null
       })
     );

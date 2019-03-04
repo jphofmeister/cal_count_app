@@ -10,10 +10,38 @@ const valDayInput = require('../../validation/day');
 // @desc    get all days
 // @access  Public
 // @TODO    Might have to add some filters to only get a week or month
+// router.get('/', (req, res) => {
+//   // Day.find()
+//   //   .then(days => res.json(days))
+//   //   .catch(err => res.status(404).json({ nodays: 'No records found for any days.' }));
+//   //req.query.week.map(day => )
+
+// });
 router.get('/', (req, res) => {
-  Day.find()
+  // Day.find({})
+  //   .where('date').in(req.query.week)
+  //   //.select('date calories')
+  //   .then(days => res.json(days))
+  //   .catch(err => res.status(404).json({ noday: 'No record found on this date.' }))
+  // // .exec((err, days) => {
+  // //   res.json(days);
+  // // })
+  let weekArray;
+  if (typeof req.query.week != 'undefined') {
+    weekArray = req.query.week.split(',');
+  }
+
+  // let convertedWeekArray = [];
+  // weekArray.forEach(date => {
+  //   convertedWeekArray.push(new Date(date));
+  // });
+
+  // console.log(convertedWeekArray);
+
+  Day.find({ 'date': { $in: weekArray } })
+    .select('date calories')
     .then(days => res.json(days))
-    .catch(err => res.status(404).json({ nodays: 'No records found for any days.' }));
+    .catch(err => res.status(404).json({ noday: 'No record found on this date.' }));
 });
 
 // @route   GET api/day/day
@@ -26,7 +54,7 @@ router.get('/date', (req, res) => {
       populate: { path: 'food' } //was ingredients before, but why?
     })
     .then(day => res.json(day))
-    .catch(err => res.status(404).json({ noday: 'No record found on this date.' }))
+    .catch(err => res.status(404).json({ noday: 'No record found on this date.' }));
 });
 
 // @route   POST api/day

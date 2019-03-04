@@ -34,8 +34,8 @@ export default function (state = initialState, action) {
     case GET_DAYS:
       return {
         ...state,
-        days: action.payload,
-        loading: false
+        days: action.payload
+        //loading: false
       };
     case GET_DAY:
       return {
