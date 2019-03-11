@@ -4,9 +4,15 @@ import styled from 'styled-components';
 import { Table } from 'reactstrap';
 
 const TableStyle = styled(Table)`
+  line-height: 1.3;
+
+  tr {
+    
+  }
+  
   thead {
     th {
-      padding: 5px 1px;
+      padding: 10px 1px;
       vertical-align: middle;
       border-top: none;
     }
@@ -16,6 +22,7 @@ const TableStyle = styled(Table)`
     td {
       border: none;
       padding: 1px;
+      padding-bottom: 1rem;
       vertical-align: middle;
     }
   }
@@ -24,12 +31,13 @@ const TableStyle = styled(Table)`
 const IconButton = styled.button`
   border: none;
   color: #5677E8;
-  padding: 7px 12px;
+  padding: 6px 9px 5px 9px;
   border-radius: 50%;
 
   :hover {
     cursor: pointer;
-    background-color: #EDEAE9;
+    //background-color: #EDEAE9;
+    background-color: #e4e8f0;
   }
 `;
 

@@ -7,6 +7,12 @@ import { startOfWeek, endOfWeek, eachDay, format } from 'date-fns';
 import WeekTable from './WeekTable';
 
 class Week extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      week: []
+    }
+  }
 
   componentDidMount() {
     let todaysDate = new Date().toISOString().slice(0, 10);
@@ -20,6 +26,10 @@ class Week extends Component {
       formattedWeek.push(format(date, 'YYYY-MM-DD'));
     });
 
+    this.setState({
+      week: week
+    });
+
     this.props.getDays(formattedWeek.toString());
   }
 
@@ -28,8 +38,7 @@ class Week extends Component {
 
     return (
       <div className="week">
-        <h2>This Week</h2>
-        <WeekTable days={days} />
+        <WeekTable days={days} week={this.state.week} />
       </div>
     )
   }

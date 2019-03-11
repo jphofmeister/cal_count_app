@@ -40,6 +40,7 @@ router.get('/', (req, res) => {
 
   Day.find({ 'date': { $in: weekArray } })
     .select('date calories')
+    .sort('date')
     .then(days => res.json(days))
     .catch(err => res.status(404).json({ noday: 'No record found on this date.' }));
 });

@@ -3,22 +3,33 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const HeaderStyle = styled.header`
-  width: 100%;
-  background-color: white;
-  padding: 1% 3%;
-  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  width: 2rem;
+  height: 100vh
+  background-color: #1A9972;
+  padding-top: .5rem;
+  text-align: center;
+  //box-shadow: 0 2px 4px rgba(0,0,0,.1);
   font-weight: 700;
-  border-top: solid 2px #1A9972;
+  //border-left: solid 2px #1A9972;
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  z-index: 100;
 `;
 
 const LogoText = styled(Link)`
-  color: #524e4d;
+  //color: #524e4d;
+  color: #fff;
   letter-spacing: 3px;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  -webkit-font-smoothing: antialiased;
 
   :hover {
-    color: #524e4d;
+    //color: #524e4d;
+    color: #fff;
     text-decoration: none;
-    letter-spacing: 5px;
+    letter-spacing: 10px;
     transition: all .1s ease-in-out;
   }
 `;
@@ -28,7 +39,7 @@ const Header = () => {
     <HeaderStyle>
       <nav>
         <LogoText to="/">
-          CAL-COUNT-APP
+          CAL COUNT APP
         </LogoText>
       </nav >
     </HeaderStyle>
