@@ -87,7 +87,7 @@ class FoodOnDate extends Component {
 
     return (
       <div className="day card-style">
-        <h3>Today's Calories</h3>
+        <h2>Today's Calories</h2>
         <Input
           name="date"
           type="date"

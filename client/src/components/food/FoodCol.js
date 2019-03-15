@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import FoodIngredientTable from '../common/FoodIngredientTable';
 import Spinner from '../common/Spinner';
 
-const FoodCol = ({ foods, loading, foodToFilter, onAddClick, onDeleteClick }) => {
+const FoodCol = ({ foods, loading, foodToFilter, onAddClick, onDeleteClick, image }) => {
 
   let headings = [' ', 'Foods', 'Calories', ''];
 
@@ -28,7 +28,7 @@ const FoodCol = ({ foods, loading, foodToFilter, onAddClick, onDeleteClick }) =>
 
   return (
     <div className={foodToFilter.toLowerCase()}>
-      <h4>{foodToFilter}s</h4>
+      <h3><img key={image} src={image} width="35" height="35" alt="" /> {foodToFilter}s</h3>
       {filteredFoodContent}
     </div>
   )

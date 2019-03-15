@@ -13,6 +13,10 @@ import FoodCol from '../food/FoodCol';
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
+import food_type_meal from '../food/images/food_type_meal.png';
+import food_type_snack from '../food/images/food_type_snack.png';
+import food_type_beverage from '../food/images/food_type_beverage.png';
+
 class ManageFoodForDate extends Component {
   constructor(props) {
     super(props);
@@ -94,11 +98,15 @@ class ManageFoodForDate extends Component {
         {foodOnDateContent}
 
         <div className="food card-style">
-          <h3>Food</h3>
-          <Button tag={Link} to="/create-food" color="primary">+ Create Food</Button>
-          <FoodCol foods={foods} foodToFilter="Meal" onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
-          <FoodCol foods={foods} foodToFilter="Snack" onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
-          <FoodCol foods={foods} foodToFilter="Beverage" onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
+          <div className="food-header">
+            <h2>Food</h2>
+            <Button tag={Link} to="/create-food" color="primary">+ Create Food</Button>
+          </div>
+          <div className="food-tables">
+            <FoodCol foods={foods} foodToFilter="Meal" image={food_type_meal} onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
+            <FoodCol foods={foods} foodToFilter="Snack" image={food_type_snack} onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
+            <FoodCol foods={foods} foodToFilter="Beverage" image={food_type_beverage} onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
+          </div>
         </div>
       </div>
     )

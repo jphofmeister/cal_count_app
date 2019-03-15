@@ -12,7 +12,7 @@ const TableStyle = styled(Table)`
   
   thead {
     th {
-      padding: 10px 1px;
+      padding: 10px 5px;
       vertical-align: middle;
       border-top: none;
     }
@@ -21,7 +21,7 @@ const TableStyle = styled(Table)`
   tbody {
     td {
       border: none;
-      padding: 1px;
+      padding: 1px 5px;
       padding-bottom: 1rem;
       vertical-align: middle;
     }

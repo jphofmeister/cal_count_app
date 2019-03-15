@@ -7,8 +7,10 @@ const Dashboard = () => {
   return (
     <div className="grid-container">
       <Week />
-      <ManageFoodForDate />
-      <Ingredients />
+      <main>
+        <ManageFoodForDate />
+        <Ingredients />
+      </main>
     </div>
   )
 }

@@ -15,6 +15,12 @@ const HeaderStyle = styled.header`
   position: fixed;
   top: 0;
   z-index: 100;
+
+  @media (max-width: 768px) {
+    height: 40px;
+    width: 100%;
+    position: relative;
+  }
 `;
 
 const LogoText = styled(Link)`
@@ -31,6 +37,10 @@ const LogoText = styled(Link)`
     text-decoration: none;
     letter-spacing: 10px;
     transition: all .1s ease-in-out;
+  }
+
+  @media (max-width: 768px) {
+    writing-mode: horizontal-tb;
   }
 `;
 

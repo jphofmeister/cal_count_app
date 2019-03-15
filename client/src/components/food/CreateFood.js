@@ -23,9 +23,13 @@ const FormGrid = styled(Form)`
   width: 100%;
   grid-template-rows: auto;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 30px;
+  grid-gap: 2rem;
   align-items: start;
   justify-items: stretch;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const MainForm = styled.div`
@@ -38,10 +42,18 @@ const MainForm = styled.div`
 
 const IngredientsToAdd = styled.div`
   grid-area: 1 / 2 / 4 / 3;
+
+  @media (max-width: 768px) {
+    grid-area: 2 / 1 / 3 / 2;
+  }
 `;
 
 const ButtonContainer = styled.div`
   grid-area: 2 / 1 / 3 / 2;
+
+  @media (max-width: 768px) {
+    grid-area: 3 / 1 / 4 / 2;
+  }
 `;
 
 class CreateFood extends Component {
