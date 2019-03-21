@@ -6,6 +6,14 @@ import isEmpty from '../../validation/is-empty';
 import { connect } from 'react-redux';
 import { addDay, deleteFoodFromDay } from '../../actions/dayActions';
 
+import styled from 'styled-components';
+
+const TotalCalories = styled.span`
+  color: #5F51E4;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+`;
+
 class FoodOnDate extends Component {
   constructor(props) {
     super(props);
@@ -95,7 +103,7 @@ class FoodOnDate extends Component {
           value={this.props.date} />
         {dayContent}
         <div>
-          Total Calories: {this.state.calories}
+          Total: <TotalCalories>{this.state.calories} calories</TotalCalories>
         </div>
       </div>
     )

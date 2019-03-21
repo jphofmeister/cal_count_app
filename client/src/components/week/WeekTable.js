@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import findDay from '../common/findDay';
+import { isToday, addHours } from 'date-fns';
 
 const WeekTableCard = styled.div`
   border: none;
@@ -43,6 +44,19 @@ const CalDisplay = styled.div`
   font-size: 20px;
 `;
 
+const TodayDayDisplay = styled.div`
+  font-size: 14px;
+  color: #8C81F2;
+  font-weight: 700;
+`;
+
+const TodayCalDisplay = styled.div`
+  font-size: 20px;
+  color: #5F51E4;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+`;
+
 const WeekTable = ({ days, week }) => {
   //let week = days;
   let fullDaysArray = days;
@@ -54,14 +68,36 @@ const WeekTable = ({ days, week }) => {
   } else {
     if (days.length < 7) {
       for (let i = days.length; i < 7; i++) {
-        fullDaysArray.push({ _id: i, calories: 0 });
+        fullDaysArray.push({ _id: i, calories: '-' });
       }
     }
 
+    console.log(fullDaysArray);
+
     calorieRow = fullDaysArray.map((day, i) =>
       <DayCalContainer>
-        <DayDisplay>{findDay(i)}</DayDisplay>
-        <CalDisplay key={day._id}>{day.calories}</CalDisplay>
+        {day.date &&
+          <Fragment>
+            {isToday(addHours(day.date, 5)) &&
+              <Fragment>
+                <TodayDayDisplay>{findDay(i)}</TodayDayDisplay>
+                <TodayCalDisplay key={day._id}>{day.calories}</TodayCalDisplay>
+              </Fragment>
+            }
+            {!isToday(addHours(day.date, 5)) &&
+              <Fragment>
+                <DayDisplay>{findDay(i)}</DayDisplay>
+                <CalDisplay key={day._id}>{day.calories}</CalDisplay>
+              </Fragment>
+            }
+          </Fragment>
+        }
+        {!day.date &&
+          <Fragment>
+            <DayDisplay>{findDay(i)}</DayDisplay>
+            <CalDisplay key={day._id}>{day.calories}</CalDisplay>
+          </Fragment>
+        }
       </DayCalContainer>
     );
   }

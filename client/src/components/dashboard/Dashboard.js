@@ -1,5 +1,5 @@
 import React from 'react';
-import Week from './Week';
+import Week from '../week/Week';
 import ManageFoodForDate from './ManageFoodForDate';
 import Ingredients from '../ingredients/Ingredients';
 
