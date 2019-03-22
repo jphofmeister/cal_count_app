@@ -36,22 +36,22 @@ a {
 }
 
 .btn-primary {
-  /* background-color: #1A9972; */
-  background: rgb(21,153,117);
-  background: linear-gradient(90deg, rgba(21,153,117,1) 0%, rgba(11,194,144,1) 100%);
+  background-color: #1A9972;
+  /* background: rgb(21,153,117);
+  background: linear-gradient(90deg, rgba(21,153,117,1) 0%, rgba(11,194,144,1) 100%); */
 }
 
 .btn-primary:hover {
-  /* background-color: #167E5E; */
-  background: rgb(22,126,94);
-  background: linear-gradient(90deg, rgba(22,126,94,1) 0%, rgba(10,168,125,1) 100%);
+  background-color: #167E5E;
+  /* background: rgb(22,126,94);
+  background: linear-gradient(90deg, rgba(22,126,94,1) 0%, rgba(10,168,125,1) 100%); */
   box-shadow: 0 3px 4px rgba(0,0,0,.2);
 }
 
 .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
-  /* background-color: #167E5E; */
-  background: rgb(22,126,94);
-  background: linear-gradient(90deg, rgba(22,126,94,1) 0%, rgba(10,168,125,1) 100%);
+  background-color: #167E5E;
+  /* background: rgb(22,126,94);
+  background: linear-gradient(90deg, rgba(22,126,94,1) 0%, rgba(10,168,125,1) 100%); */
 }
 
 .grid-container {
