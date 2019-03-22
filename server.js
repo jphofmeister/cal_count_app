@@ -9,7 +9,7 @@ const day = require('./routes/api/day');
 
 const app = express();
 
-app.use('/', express.static(__dirname + '/public'));
+//app.use('/', express.static(__dirname + '/public'));
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
