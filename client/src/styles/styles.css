@@ -36,7 +36,9 @@ a {
 }
 
 .btn-primary {
-  background-color: #1A9972;
+  /* background-color: #1A9972; */
+  background: rgb(21,153,117);
+  background: linear-gradient(90deg, rgba(21,153,117,1) 0%, rgba(11,194,144,1) 100%);
 }
 
 .btn-primary:hover {

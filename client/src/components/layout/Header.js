@@ -5,7 +5,9 @@ import styled from 'styled-components';
 const HeaderStyle = styled.header`
   width: 2rem;
   height: 100vh
-  background-color: #1A9972;
+  //background-color: #1A9972;
+  background: rgb(21,153,117);
+  background: linear-gradient(180deg, rgba(21,153,117,1) 0%, rgba(11,194,144,1) 100%);
   padding-top: .5rem;
   text-align: center;
   //box-shadow: 0 2px 4px rgba(0,0,0,.1);
