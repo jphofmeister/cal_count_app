@@ -23,7 +23,7 @@ class ManageFoodForDate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: new Date().toISOString().slice(0, 10),
+      date: subHours(new Date(), 4).toISOString().slice(0, 10),
       foodEaten: [],
       calories: 0
     }
@@ -36,7 +36,7 @@ class ManageFoodForDate extends Component {
 
   componentDidMount() {
     this.props.getFoods();
-    let todaysDate = subHours(new Date(), 5).toISOString().slice(0, 10);
+    let todaysDate = subHours(new Date(), 4).toISOString().slice(0, 10);
     this.props.getDay(todaysDate);
   }
 

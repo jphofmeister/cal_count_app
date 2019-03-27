@@ -78,13 +78,13 @@ const WeekTable = ({ days, week }) => {
       <DayCalContainer>
         {day.date &&
           <Fragment>
-            {isToday(addHours(day.date, 5)) &&
+            {isToday(addHours(day.date, 4)) &&
               <Fragment>
                 <TodayDayDisplay>{findDay(i)}</TodayDayDisplay>
                 <TodayCalDisplay key={day._id}>{day.calories}</TodayCalDisplay>
               </Fragment>
             }
-            {!isToday(addHours(day.date, 5)) &&
+            {!isToday(addHours(day.date, 4)) &&
               <Fragment>
                 <DayDisplay>{findDay(i)}</DayDisplay>
                 <CalDisplay key={day._id}>{day.calories}</CalDisplay>
