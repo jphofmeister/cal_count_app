@@ -13,6 +13,8 @@ import FoodCol from '../food/FoodCol';
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
+import { subHours } from 'date-fns';
+
 import food_type_meal from '../food/images/food_type_meal.png';
 import food_type_snack from '../food/images/food_type_snack.png';
 import food_type_beverage from '../food/images/food_type_beverage.png';
@@ -34,7 +36,7 @@ class ManageFoodForDate extends Component {
 
   componentDidMount() {
     this.props.getFoods();
-    let todaysDate = new Date().toISOString().slice(0, 10)
+    let todaysDate = subHours(new Date(), 5).toISOString().slice(0, 10);
     this.props.getDay(todaysDate);
   }
 
