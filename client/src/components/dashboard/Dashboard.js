@@ -9,7 +9,7 @@ const Dashboard = () => {
       <Week />
       <main>
         <ManageFoodForDate />
-        <Ingredients />
+        {/* <Ingredients /> */}
       </main>
     </div>
   )
