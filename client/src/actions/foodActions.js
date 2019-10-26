@@ -15,7 +15,7 @@ import {
 export const addFood = (foodData, history) => dispatch => {
   dispatch(clearErrors());
   axios
-    .post('api/food', foodData)
+    .post('/api/food', foodData)
     .then(res =>
       history.push('/')
     )
