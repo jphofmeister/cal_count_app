@@ -111,7 +111,7 @@ class TodayAndSearchContainer extends Component {
             <FoodCol foods={foods} foodToFilter="Snack" image={food_type_snack} onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
             <FoodCol foods={foods} foodToFilter="Beverage" image={food_type_beverage} onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
           </div> */}
-          <SearchFood foods={foods} />
+          <SearchFood foods={foods} onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
         </div>
       </main>
     )
