@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSearch } from '../../hooks/useSearch';
 import FoodIngredientTable from '../common/FoodIngredientTable';
 import { Input } from 'reactstrap';
@@ -10,7 +10,11 @@ const SearchFood = ({ foods, onAddClick, onDeleteClick }) => {
 
   return (
     <div>
-      <Input type="text" className="search" onChange={e => searchFoods(foods, e.target.value)} placeholder="Search..." />
+      <Input
+        type="text"
+        className="search"
+        onChange={e => searchFoods(foods, e.target.value)}
+        placeholder="Search..." />
       <FoodIngredientTable
         items={filteredFood}
         headings={headings}

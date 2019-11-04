@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import { isToday } from 'date-fns';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addDay, getDay, deleteFoodFromDay } from '../../actions/dayActions';
@@ -8,7 +7,6 @@ import { getFoods, deleteFood } from '../../actions/foodActions';
 import Spinner from '../common/Spinner';
 
 import FoodOnDate from './FoodOnDate';
-import FoodCol from '../food/FoodCol';
 
 import SearchFood from '../search/SearchFood';
 
@@ -16,10 +14,6 @@ import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
 import { subHours } from 'date-fns';
-
-import food_type_meal from '../food/images/food_type_meal.png';
-import food_type_snack from '../food/images/food_type_snack.png';
-import food_type_beverage from '../food/images/food_type_beverage.png';
 
 class TodayAndSearchContainer extends Component {
   constructor(props) {
@@ -106,11 +100,6 @@ class TodayAndSearchContainer extends Component {
             <h2>Food</h2>
             <Button tag={Link} to="/create-food" color="primary">+ Create Food</Button>
           </div>
-          {/* <div className="food-tables">
-            <FoodCol foods={foods} foodToFilter="Meal" image={food_type_meal} onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
-            <FoodCol foods={foods} foodToFilter="Snack" image={food_type_snack} onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
-            <FoodCol foods={foods} foodToFilter="Beverage" image={food_type_beverage} onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
-          </div> */}
           <SearchFood foods={foods} onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
         </div>
       </main>

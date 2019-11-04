@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { addDay, deleteFoodFromDay } from '../../actions/dayActions';
 
 import styled from 'styled-components';
+import { getFood } from '../../actions/foodActions';
 
 const TotalCalories = styled.span`
   color: #5F51E4;
@@ -33,13 +34,13 @@ class FoodOnDate extends Component {
 
     // if props.day doesn't equal null, set the state equal to it
     if (day !== null) {
-      let foodEatenIds = !isEmpty(day.foodEaten) ? day.foodEaten.map(food => food._id) : [];
+      day.foodEaten = !isEmpty(day.foodEaten) ? day.foodEaten : [];
       day.date = !isEmpty(day.date) ? day.date.slice(0, 10) : new Date().toISOString().slice(0, 10);
-      day.calories = !isEmpty(day.calories) ? day.calories : 0;
+      day.calories = !isEmpty(day.calories) ? day.calories : 0
 
       this.setState({
         date: this.props.date,
-        foodEaten: foodEatenIds,
+        foodEaten: day.foodEaten,
         calories: day.calories
       });
     }
@@ -61,14 +62,11 @@ class FoodOnDate extends Component {
     const { day, loading, foods } = this.props;
     const headings = ['Food', 'Qty', 'Cal', ' '];
 
-    let foodAddedToDay = foods.map(food => {
-      // if any food is not found in foodEaten, return null
-      if (!this.state.foodEaten.includes(food._id)) return null;
-
+    let foodAddedToDay = this.state.foodEaten.map(food => {
       //count each time a food is listed in foodEaten
       let counts = 0;
       this.state.foodEaten.forEach(foodOfToday => {
-        if (foodOfToday === food._id) {
+        if (foodOfToday._id === food._id) {
           counts++;
         }
       });
@@ -81,16 +79,13 @@ class FoodOnDate extends Component {
       });
     });
 
-    //filter out the nulls so we don't receive errors later
-    let filteredFoodAddedToDay = foodAddedToDay.filter(Boolean);
-
     //check if any food is added to today before setting the FoodIngredientTable
     let dayContent;
 
-    if (filteredFoodAddedToDay === null || filteredFoodAddedToDay === undefined || loading) {
+    if (foodAddedToDay === null || foodAddedToDay === undefined || loading) {
       dayContent = "No food added today";
     } else {
-      dayContent = <FoodIngredientTable items={filteredFoodAddedToDay} headings={headings} onDeleteClick={this.onDeleteFoodFromDay} />
+      dayContent = <FoodIngredientTable items={foodAddedToDay} headings={headings} onDeleteClick={this.onDeleteFoodFromDay} />
     }
 
     return (
@@ -111,11 +106,12 @@ class FoodOnDate extends Component {
 }
 
 FoodOnDate.propTypes = {
-  onDeleteFoodFromDay: PropTypes.func
+  onDeleteFoodFromDay: PropTypes.func,
+  getFood: PropTypes.func
 }
 
 const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { addDay, deleteFoodFromDay })(FoodOnDate);
+export default connect(mapStateToProps, { addDay, deleteFoodFromDay, getFood })(FoodOnDate);
