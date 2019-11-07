@@ -63,6 +63,7 @@ class FoodOnDate extends Component {
     const headings = ['Food', 'Qty', 'Cal', ' '];
 
     let foodAddedToDay = this.state.foodEaten.map(food => {
+
       //count each time a food is listed in foodEaten
       let counts = 0;
       this.state.foodEaten.forEach(foodOfToday => {
