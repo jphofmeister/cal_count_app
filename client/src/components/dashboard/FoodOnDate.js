@@ -84,7 +84,7 @@ class FoodOnDate extends Component {
     //filter out the nulls so we don't receive errors later
     let filteredFoodAddedToDay = foodAddedToDay.filter(Boolean);
 
-    //check if any food is added to today before setting the FoodIngredientTable
+    //check if any food is added to today before setting the FoodIngredientTable - test if deploy still works
     let dayContent;
 
     if (filteredFoodAddedToDay === null || filteredFoodAddedToDay === undefined || loading) {
