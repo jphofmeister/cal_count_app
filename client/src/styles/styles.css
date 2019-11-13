@@ -80,7 +80,7 @@ main {
   margin-bottom: 2rem;
   display: grid;
   grid-template-rows: auto;
-  grid-template-columns: [day] 1fr [food] 3fr;
+  grid-template-columns: [day] 2fr [food] 3fr;
   grid-gap: 2rem;
   align-items: start;
   justify-items: stretch;

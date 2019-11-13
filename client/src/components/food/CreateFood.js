@@ -33,10 +33,6 @@ const FormGrid = styled(Form)`
 `;
 
 const MainForm = styled.div`
-  /* grid-row-start: 1;
-  grid-column-start: 1;
-  grid-row-end: 2;
-  grid-column-end: 5; */
   grid-area: 1 / 1 / 2 / 2;
 `;
 
