@@ -27,6 +27,7 @@ class FoodOnDate extends Component {
 
     this.handleChangeDate = this.handleChangeDate.bind(this);
     this.onDeleteFoodFromDay = this.onDeleteFoodFromDay.bind(this);
+    this.removeDuplicates = this.removeDuplicates.bind(this);
   }
 
   componentDidMount() {
@@ -58,6 +59,12 @@ class FoodOnDate extends Component {
     this.props.deleteFoodFromDay(date, id, foodCal);
   }
 
+  removeDuplicates(foodArr, id) {
+    return foodArr.filter((obj, pos, arr) => {
+      return arr.map(mapObj => mapObj[id]).indexOf(obj[id]) === pos;
+    });
+  }
+
   render() {
     const { day, loading, foods } = this.props;
     const headings = ['Food', 'Qty', 'Cal', ' '];
@@ -80,13 +87,16 @@ class FoodOnDate extends Component {
       });
     });
 
+    //remove duplicates from array
+    let uniqueFoodFromDay = this.removeDuplicates(foodAddedToDay, '_id');
+
     //check if any food is added to today before setting the FoodIngredientTable
     let dayContent;
 
-    if (foodAddedToDay === null || foodAddedToDay === undefined || loading) {
+    if (uniqueFoodFromDay === null || uniqueFoodFromDay === undefined || loading) {
       dayContent = "No food added today";
     } else {
-      dayContent = <FoodIngredientTable items={foodAddedToDay} headings={headings} onDeleteClick={this.onDeleteFoodFromDay} />
+      dayContent = <FoodIngredientTable items={uniqueFoodFromDay} headings={headings} onDeleteClick={this.onDeleteFoodFromDay} />
     }
 
     return (
