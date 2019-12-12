@@ -95,11 +95,12 @@ class TodayAndSearchContainer extends Component {
 
         {foodOnDateContent}
 
-        <div className="food card-style">
+        <div className="food">
           <div className="food-header">
-            <h2>Food</h2>
+            <h2>What have you eaten today?</h2>
             <Button tag={Link} to="/create-food" color="primary">+ Create Food</Button>
           </div>
+          <p>Search for food and click on the + to add the food you’ve eaten today.</p>
           <SearchFood foods={foods} onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
         </div>
       </main>

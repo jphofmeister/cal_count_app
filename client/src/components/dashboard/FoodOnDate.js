@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import FoodIngredientTable from '../common/FoodIngredientTable';
-import { Input } from 'reactstrap';
 import PropTypes from 'prop-types';
 import isEmpty from '../../validation/is-empty';
 import { connect } from 'react-redux';
@@ -8,6 +7,14 @@ import { addDay, deleteFoodFromDay } from '../../actions/dayActions';
 
 import styled from 'styled-components';
 import { getFood } from '../../actions/foodActions';
+
+const DateSelector = styled.input`
+  background-color: #F3F5FA;
+  border: none;
+  padding: .625rem;
+  width: 100%;
+  border-radius: 4px;
+`;
 
 const TotalCalories = styled.span`
   color: #5F51E4;
@@ -102,7 +109,7 @@ class FoodOnDate extends Component {
     return (
       <div className="day card-style">
         <h2>Today's Calories</h2>
-        <Input
+        <DateSelector
           name="date"
           type="date"
           onChange={this.handleChangeDate}

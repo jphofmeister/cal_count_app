@@ -1,7 +1,18 @@
 import React from 'react';
 import { useSearch } from '../../hooks/useSearch';
 import FoodIngredientTable from '../common/FoodIngredientTable';
-import { Input } from 'reactstrap';
+
+import styled from 'styled-components';
+
+const SearchInput = styled.input`
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  line-height: 1;
+`;
 
 const SearchFood = ({ foods, onAddClick, onDeleteClick }) => {
   const [filteredFood, searchFoods] = useSearch();
@@ -10,7 +21,7 @@ const SearchFood = ({ foods, onAddClick, onDeleteClick }) => {
 
   return (
     <div>
-      <Input
+      <SearchInput
         type="text"
         className="search"
         onChange={e => searchFoods(foods, e.target.value)}

@@ -76,7 +76,7 @@ main {
 }
 
 .day-food-grid {
-  margin-top: 1rem;
+  margin-top: 2rem;
   margin-bottom: 2rem;
   display: grid;
   grid-template-rows: auto;
