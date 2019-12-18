@@ -9,39 +9,17 @@ const valDayInput = require('../../validation/day');
 // @route   GET api/day
 // @desc    get all days
 // @access  Public
-// @TODO    Might have to add some filters to only get a week or month
-// router.get('/', (req, res) => {
-//   // Day.find()
-//   //   .then(days => res.json(days))
-//   //   .catch(err => res.status(404).json({ nodays: 'No records found for any days.' }));
-//   //req.query.week.map(day => )
-
-// });
 router.get('/', (req, res) => {
-  // Day.find({})
-  //   .where('date').in(req.query.week)
-  //   //.select('date calories')
-  //   .then(days => res.json(days))
-  //   .catch(err => res.status(404).json({ noday: 'No record found on this date.' }))
-  // // .exec((err, days) => {
-  // //   res.json(days);
-  // // })
   let weekArray;
   if (typeof req.query.week != 'undefined') {
     weekArray = req.query.week.split(',');
   }
 
-  // let convertedWeekArray = [];
-  // weekArray.forEach(date => {
-  //   convertedWeekArray.push(new Date(date));
-  // });
-
-  // console.log(convertedWeekArray);
-
   Day.find({ 'date': { $in: weekArray } })
     .select('date calories')
     .sort('date')
     .then(days => res.json(days))
+
     .catch(err => res.status(404).json({ noday: 'No record found on this date.' }));
 });
 
@@ -90,33 +68,6 @@ router.post('/', (req, res) => {
     })
     .catch(err => res.status(404).json(err));
 });
-
-// @route   PUT api/day/:id
-// @desc    edit food record of a single day
-// @access  Public
-// router.put('/:id', (req, res) => {
-//   const { errors, isValid } = valDayInput(req.body);
-
-//   // check validation
-//   if (!isValid) {
-//     return res.status(400).json(errors);
-//   }
-
-//   const updatedDay = {};
-//   if (req.body.date) updatedDay.date = req.body.date;
-//   if (typeof req.body.foodEaten != 'undefined') {
-//     updatedDay.foodEaten = req.body.foodEaten.split(',');
-//   }
-//   if (req.body.calories) updatedDay.calories = req.body.calories;
-
-//   Day.findOneAndUpdate(
-//     { _id: req.params.id },
-//     { $set: updatedDay },
-//     { new: true }
-//   )
-//     .then(day => res.json(day))
-//     .catch(err => res.status(404).json(err));
-// });
 
 // @route   DELETE api/day/date
 // @desc    remove food record of a single day

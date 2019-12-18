@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import findDay from '../common/findDay';
-import { isToday, addHours } from 'date-fns';
+import { isToday, addHours, isEqual, format } from 'date-fns';
 
 const WeekTableCard = styled.div`
   border: none;
@@ -58,21 +58,38 @@ const TodayCalDisplay = styled.div`
 `;
 
 const WeekTable = ({ days, week }) => {
-  //let week = days;
-  let fullDaysArray = days;
+  const [fullDaysArray, setFullDaysArray] = useState([]);
+  useEffect(() => {
+    setFullDaysArray(week.map(day => {
+      return { key: day, date: day, calories: '-' };
+    }));
+  }, [week]);
 
-  //if a day in the week doesn't have any data, can fill array with 0's
+  console.log(fullDaysArray);
+
   let calorieRow;
-  if (days === null) {
-    calorieRow = "No date for this week.";
+  if (days === null || fullDaysArray === undefined || fullDaysArray === null) {
+    calorieRow = "No data for this week.";
   } else {
-    if (days.length < 7) {
-      for (let i = days.length; i < 7; i++) {
-        fullDaysArray.push({ _id: i, calories: '-' });
-      }
-    }
+    let testArray = [];
+    // for (let i = 0; i < 7; i++) {
+    //   if (isEqual(fullDaysArray[i].date, days.date[i])) {
+    //     testArray.push(days.date);
+    //   } else {
+    //     testArray.push("false");
+    //   }
+    //   console.log(testArray);
+    // }
 
-    console.log(fullDaysArray);
+    fullDaysArray.forEach((e1) => days.forEach((e2) => {
+      if (isEqual(format(e1.date, 'YYYY-MM-DD'), format(e2.date, 'YYYY-MM-DD'))) {
+        testArray.push(days.date);
+      } else {
+        testArray.push("false");
+      }
+      console.log(testArray);
+    }));
+
 
     calorieRow = fullDaysArray.map((day, i) =>
       <DayCalContainer>
