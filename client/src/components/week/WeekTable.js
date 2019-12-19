@@ -59,11 +59,25 @@ const TodayCalDisplay = styled.div`
 
 const WeekTable = ({ days, week }) => {
   const [fullDaysArray, setFullDaysArray] = useState([]);
+
   useEffect(() => {
-    setFullDaysArray(week.map(day => {
-      return { key: day, date: day, calories: '-' };
+    let emptyWeek = week.map(day => {
+      return { key: format(day, 'YYYY-MM-DD'), date: format(day, 'YYYY-MM-DD'), calories: '-' };
+    });
+
+    setFullDaysArray(emptyWeek);
+
+    fullDaysArray.forEach((e1) => days.forEach((e2) => {
+      if (isEqual(e1.date, format(addHours(e2.date, 5), 'YYYY-MM-DD'))) {
+        let updatedDays = [...fullDaysArray];
+        e1.calories = e2.calories;
+        setFullDaysArray(updatedDays);
+      }
+      else {
+        return false;
+      }
     }));
-  }, [week]);
+  }, [days, week]);
 
   console.log(fullDaysArray);
 
@@ -71,26 +85,6 @@ const WeekTable = ({ days, week }) => {
   if (days === null || fullDaysArray === undefined || fullDaysArray === null) {
     calorieRow = "No data for this week.";
   } else {
-    let testArray = [];
-    // for (let i = 0; i < 7; i++) {
-    //   if (isEqual(fullDaysArray[i].date, days.date[i])) {
-    //     testArray.push(days.date);
-    //   } else {
-    //     testArray.push("false");
-    //   }
-    //   console.log(testArray);
-    // }
-
-    fullDaysArray.forEach((e1) => days.forEach((e2) => {
-      if (isEqual(format(e1.date, 'YYYY-MM-DD'), format(e2.date, 'YYYY-MM-DD'))) {
-        testArray.push(days.date);
-      } else {
-        testArray.push("false");
-      }
-      console.log(testArray);
-    }));
-
-
     calorieRow = fullDaysArray.map((day, i) =>
       <DayCalContainer>
         {day.date &&
