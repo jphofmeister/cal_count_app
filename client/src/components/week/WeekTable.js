@@ -67,16 +67,18 @@ const WeekTable = ({ days, week }) => {
 
     setFullDaysArray(emptyWeek);
 
-    fullDaysArray.forEach((e1) => days.forEach((e2) => {
-      if (isEqual(e1.date, format(addHours(e2.date, 5), 'YYYY-MM-DD'))) {
-        let updatedDays = [...fullDaysArray];
-        e1.calories = e2.calories;
-        setFullDaysArray(updatedDays);
-      }
-      else {
-        return false;
-      }
-    }));
+    if (days !== null) {
+      fullDaysArray.forEach((e1, index) => days.forEach((e2) => {
+        if (isEqual(e1.date, format(addHours(e2.date, 5), 'YYYY-MM-DD'))) {
+          let updatedDays = [...fullDaysArray];
+          updatedDays[index].calories = e2.calories;
+          setFullDaysArray(updatedDays);
+        }
+        else {
+          return false;
+        }
+      }));
+    }
   }, [days, week]);
 
   console.log(fullDaysArray);
