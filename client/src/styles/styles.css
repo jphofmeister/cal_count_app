@@ -58,19 +58,20 @@ a {
   display: grid;
   width: calc(100% - 4rem);
   margin-left: 2rem;
-  grid-template-rows: auto;
-  grid-template-columns: [week] 1fr [main] 6fr;
+  /* grid-template-rows: auto; */
+  grid-template-areas: "week main";
+  grid-template-columns: 1fr 6fr;
   align-items: start;
   justify-items: stretch;
 }
 
 .week {
-  grid-column: week;
+  grid-area: week;
   overflow-x: scroll;
 }
 
 main {
-  grid-column: main;
+  grid-area: main;
   height: 100vh;
   overflow: auto;
 }
@@ -79,37 +80,45 @@ main {
   margin-top: 2rem;
   margin-bottom: 2rem;
   display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: [day] 2fr [food] 3fr;
+  grid-template-areas: 
+    "day food-header"
+    "day search";
+  /* grid-template-rows: auto; */
+  grid-template-columns: 2fr 3fr;
   grid-gap: 2rem;
-  align-items: start;
-  justify-items: stretch;
+  align-items: flex-start;
+  /* justify-items: stretch; */
+  align-content: flex-start;
 }
   
 .day {
-  grid-column: day;
+  grid-area: day;
 }
   
-.food {
+/* .food {
   grid-column: food;
 
   display: grid;
   grid-template-rows: [header] auto [food-tables] auto;
   grid-template-columns: auto;
-  /* grid-template-columns: [meal] 1fr [snack] 1fr [beverage] 1fr; */
+  grid-template-columns: [meal] 1fr [snack] 1fr [beverage] 1fr;
   grid-gap: 2rem;
   align-items: start;
   justify-items: stretch;
-}
+} */
 
 .food-header {
-  grid-row: header;
+  grid-area: food-header;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 2rem;
 }
 
-.food-tables {
+.search {
+  grid-area: search;
+}
+
+/* .food-tables {
   grid-row: food-tables;
 
   display: grid;
@@ -117,23 +126,26 @@ main {
   grid-gap: 2rem;
   align-items: start;
   justify-items: stretch;
-}
+} */
 
-@media (max-width: 1230px) {
+/* @media (max-width: 1230px) {
   .food-tables {
     grid-template-columns: repeat(2, 1fr);
   }
-}
+} */
 
-@media (max-width: 960px) {
+/* @media (max-width: 960px) {
   .food-tables {
     grid-template-columns: repeat(1, 1fr);
   }
-}
+} */
 
 @media (max-width: 768px) {
   .grid-container {
     width: 100%;
+    grid-template-areas: 
+      "week"
+      "main";
     grid-template-columns: 1fr;
     margin-left: 0;
   }
@@ -151,6 +163,10 @@ main {
   .day-food-grid {
     grid-template-columns: 1fr;
     grid-gap: 2rem 0;
+    grid-template-areas: 
+    "search"
+    "day"
+    "food-header";
   }
 }
 
