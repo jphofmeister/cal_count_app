@@ -110,11 +110,16 @@ main {
 .food-header {
   grid-area: food-header;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, auto);
   grid-gap: 2rem;
+  align-items: center;
 }
 
-.search {
+.food-header h2 {
+  margin-bottom: 0;
+}
+
+.search-area {
   grid-area: search;
 }
 
@@ -151,7 +156,27 @@ main {
   }
 
   .food-header {
-    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 0;
+    margin: 0 1rem;
+  }
+
+  .food-header .btn-primary {
+    background-color: transparent;
+    color: #1A9972;
+    padding: 0;
+  }
+
+  .food-header .btn-primary:hover,
+  .food-header .btn-primary:focus,
+  .food-header .btn-primary:active {
+    background-color: transparent !important;
+    color: #1A9972 !important;
+    box-shadow: none;
+    text-decoration: underline;
+  }
+
+  .search-area {
+    margin: 0 1rem;
   }
 
   main {
@@ -162,17 +187,17 @@ main {
 @media (max-width: 520px) {
   .day-food-grid {
     grid-template-columns: 1fr;
-    grid-gap: 2rem 0;
+    grid-gap: 1rem;
     grid-template-areas: 
+    "food-header"
     "search"
-    "day"
-    "food-header";
+    "day";
   }
 }
 
-.ingredients {
+/* .ingredients {
   margin-bottom: 2rem;
-}
+} */
 
 .card-style {
   padding: 15px;

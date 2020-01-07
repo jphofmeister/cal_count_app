@@ -11,9 +11,15 @@ import FoodOnDate from './FoodOnDate';
 import SearchFood from '../search/SearchFood';
 
 import { Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import styled from 'styled-components';
 
 import { subHours } from 'date-fns';
+
+// const CreateFoodBtn = styled(Link)`
+//   background-color: #1A9972;
+//   color: #fff;
+//   text-transform: uppercase;
+// `;
 
 class TodayAndSearchContainer extends Component {
   constructor(props) {
@@ -98,9 +104,9 @@ class TodayAndSearchContainer extends Component {
         {/* <div className="food"> */}
         <div className="food-header">
           <h2>What have you eaten today?</h2>
-          <Button tag={Link} to="/create-food" color="primary">+ Create Food</Button>
+          <Link to="/create-food" className="btn btn-primary">+ Create Food</Link>
         </div>
-        <div class="search">
+        <div class="search-area">
           <p>Search for food and click on the + to add the food you’ve eaten today.</p>
           <SearchFood foods={foods} onAddClick={this.onAddFoodToDay} onDeleteClick={this.onDeleteFood} />
         </div >
