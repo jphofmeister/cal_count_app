@@ -19,6 +19,21 @@ const SearchFood = ({ foods, onAddClick, onDeleteClick }) => {
 
   let headings = ['', 'Foods', 'Calories', ''];
 
+  let filteredFoodTable;
+  if (filteredFood === null || filteredFood.length === 0) {
+    filteredFoodTable = null;
+  } else {
+    filteredFoodTable = (
+      <div className="card-style" style={{ marginTop: .5 + 'rem' }}>
+        <FoodIngredientTable
+          items={filteredFood}
+          headings={headings}
+          onAddClick={(id, calories, e) => onAddClick(id, calories, e)}
+          onDeleteClick={(id) => onDeleteClick(id)} />
+      </div>
+    );
+  }
+
   return (
     <div>
       <SearchInput
@@ -26,11 +41,7 @@ const SearchFood = ({ foods, onAddClick, onDeleteClick }) => {
         className="search"
         onChange={e => searchFoods(foods, e.target.value)}
         placeholder="Search..." />
-      <FoodIngredientTable
-        items={filteredFood}
-        headings={headings}
-        onAddClick={(id, calories, e) => onAddClick(id, calories, e)}
-        onDeleteClick={(id) => onDeleteClick(id)} />
+      {filteredFoodTable}
     </div>
   )
 }

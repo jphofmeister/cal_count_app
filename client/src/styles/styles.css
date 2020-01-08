@@ -1,8 +1,5 @@
 html, body {
-  /* background-color: #E7EBF3; */
-  /* background-color: #fef6f3; */
   background-color: #e4e8f0;
-  /* font-family: 'Montserrat', sans-serif; */
   font-family: 'Cabin', sans-serif;
   color: #393230 !important;
   -webkit-font-smoothing: antialiased;
@@ -37,28 +34,21 @@ a {
 
 .btn-primary {
   background-color: #1A9972;
-  /* background: rgb(21,153,117);
-  background: linear-gradient(90deg, rgba(21,153,117,1) 0%, rgba(11,194,144,1) 100%); */
 }
 
 .btn-primary:hover {
   background-color: #167E5E;
-  /* background: rgb(22,126,94);
-  background: linear-gradient(90deg, rgba(22,126,94,1) 0%, rgba(10,168,125,1) 100%); */
   box-shadow: 0 3px 4px rgba(0,0,0,.2);
 }
 
 .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
   background-color: #167E5E;
-  /* background: rgb(22,126,94);
-  background: linear-gradient(90deg, rgba(22,126,94,1) 0%, rgba(10,168,125,1) 100%); */
 }
 
 .grid-container {
   display: grid;
   width: calc(100% - 4rem);
   margin-left: 2rem;
-  /* grid-template-rows: auto; */
   grid-template-areas: "week main";
   grid-template-columns: 1fr 6fr;
   align-items: start;
@@ -80,35 +70,23 @@ main {
   margin-top: 2rem;
   margin-bottom: 2rem;
   display: grid;
-  grid-template-areas: 
-    "day food-header"
-    "day search";
-  /* grid-template-rows: auto; */
+  grid-template-areas: "day food-search";
   grid-template-columns: 2fr 3fr;
   grid-gap: 2rem;
   align-items: flex-start;
-  /* justify-items: stretch; */
   align-content: flex-start;
 }
   
 .day {
   grid-area: day;
 }
-  
-/* .food {
-  grid-column: food;
 
-  display: grid;
-  grid-template-rows: [header] auto [food-tables] auto;
-  grid-template-columns: auto;
-  grid-template-columns: [meal] 1fr [snack] 1fr [beverage] 1fr;
-  grid-gap: 2rem;
-  align-items: start;
-  justify-items: stretch;
-} */
+.food-header-search-container {
+  grid-area: food-search;
+}
 
 .food-header {
-  grid-area: food-header;
+  /* grid-area: food-header; */
   display: grid;
   grid-template-columns: repeat(2, auto);
   grid-gap: 2rem;
@@ -119,30 +97,8 @@ main {
   margin-bottom: 0;
 }
 
-.search-area {
+/* .search-area {
   grid-area: search;
-}
-
-/* .food-tables {
-  grid-row: food-tables;
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2rem;
-  align-items: start;
-  justify-items: stretch;
-} */
-
-/* @media (max-width: 1230px) {
-  .food-tables {
-    grid-template-columns: repeat(2, 1fr);
-  }
-} */
-
-/* @media (max-width: 960px) {
-  .food-tables {
-    grid-template-columns: repeat(1, 1fr);
-  }
 } */
 
 @media (max-width: 768px) {
@@ -155,9 +111,9 @@ main {
     margin-left: 0;
   }
 
-  .food-header {
+  .food-header-search-container {
     grid-gap: 0;
-    margin: 0 1rem;
+    margin-right: 1rem;
   }
 
   .food-header .btn-primary {
@@ -189,15 +145,14 @@ main {
     grid-template-columns: 1fr;
     grid-gap: 1rem;
     grid-template-areas: 
-    "food-header"
-    "search"
+    "food-search"
     "day";
   }
-}
 
-/* .ingredients {
-  margin-bottom: 2rem;
-} */
+  .food-header-search-container {
+    margin: 0 1rem 1rem;
+  }
+}
 
 .card-style {
   padding: 15px;
